@@ -3,13 +3,15 @@ import React from 'react';
 import ActionDetails from "../ActionDetails/ActionDetails";
 import Receipt from "../ActionBuying/Receipt";
 import StockExchange from "../ActionBuying/StockExchange";
+import Search from "../Search/Search";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path={"/buy"} component={forActionBuy}/>
-        <Route path={"/"} component={ActionDetails}/>
+        <Route path={"/search"} exact component={Search}/>
+        <Route path={"/"} exact component={ActionDetails}/>
       </Switch>
     </BrowserRouter>
   )
