@@ -7,5 +7,22 @@ exports[`should match snapshot 1`] = `
   >
     Hello World
   </h1>
+  <button
+    data-testid="detail-click-me-button-id"
+    onClick={[Function]}
+  >
+    Click me!
+  </button>
+  <form>
+    <input
+      aria-label="input"
+      data-testid="input-id"
+      onChange={[Function]}
+    />
+    <button
+      data-testid="detail-submit-button-id"
+      type="submit"
+    />
+  </form>
 </div>
 `;
