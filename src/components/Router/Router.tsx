@@ -1,9 +1,9 @@
 import {Route, Switch, BrowserRouter} from 'react-router-dom';
 import React from 'react';
 import ActionDetails from "../ActionDetails/ActionDetails";
-import Receipt from "../ActionBuying/Receipt";
-import StockExchange from "../ActionBuying/StockExchange";
+import Receipt from "../Exchange/Receipt";
 import Search from "../Search/Search";
+import StockExchange from "../Exchange/StockExchange";
 
 const Router = () => {
   return (
@@ -19,8 +19,9 @@ const Router = () => {
 
 const forActionBuy = () => {
 
-    const mockAction = {
+    const mockStock = {
         date: new Date(),
+        name: 'Some Company',
         symbol: "HOL",
         exchange: "NOW",
         open: 10,
@@ -32,7 +33,9 @@ const forActionBuy = () => {
     }
 
     return (
-        <StockExchange action={mockAction}/>
+        <div>
+            <StockExchange stock={mockStock}/>
+        </div>
     )
 }
 
