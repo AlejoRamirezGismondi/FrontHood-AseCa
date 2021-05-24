@@ -1,9 +1,9 @@
 import {Route, Switch, BrowserRouter} from 'react-router-dom';
 import React from 'react';
-import ActionDetails from "../ActionDetails/ActionDetails";
 import Receipt from "../Exchange/Receipt";
 import Search from "../Search/Search";
 import StockExchange from "../Exchange/StockExchange";
+import ActionDetails from "../ActionDetails/ActionDetails";
 
 const Router = () => {
   return (
