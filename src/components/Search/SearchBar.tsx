@@ -12,6 +12,7 @@ const SearchBar = () => (
     </div>*/
     <div className="component-search-input">
         <input
+            data-testid={"search-input-id"}
             type="text"
             id="action-search"
             placeholder="Search Action"

@@ -1,0 +1,214 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot 1`] = `
+<div>
+  <div
+    className="component-search-input"
+  >
+    <input
+      data-testid="search-input-id"
+      id="action-search"
+      maxLength={30}
+      minLength={2}
+      onChange={[Function]}
+      placeholder="Search Action"
+      type="text"
+    />
+  </div>
+  <div
+    className="container"
+    data-testid="search-container-id"
+  >
+    <a
+      href="/action_detail/1"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "none",
+        }
+      }
+    >
+      <div
+        className="action-card"
+        data-testid="action-card-id-1"
+        onClick={[Function]}
+      >
+        <h2
+          className="action-card-title"
+        >
+          Adobe
+           (
+          ADBE
+          )
+        </h2>
+        <p
+          className="action-card-company"
+        >
+          Adobe Inc
+        </p>
+        <p
+          className="action-card-price"
+        >
+          $
+          488
+        </p>
+      </div>
+    </a>
+    <a
+      href="/action_detail/2"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "none",
+        }
+      }
+    >
+      <div
+        className="action-card"
+        data-testid="action-card-id-2"
+        onClick={[Function]}
+      >
+        <h2
+          className="action-card-title"
+        >
+          Spotify Technology
+           (
+          SPOT
+          )
+        </h2>
+        <p
+          className="action-card-company"
+        >
+          Spotify Technology S.A.
+        </p>
+        <p
+          className="action-card-price"
+        >
+          $
+          229
+        </p>
+      </div>
+    </a>
+    <a
+      href="/action_detail/3"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "none",
+        }
+      }
+    >
+      <div
+        className="action-card"
+        data-testid="action-card-id-3"
+        onClick={[Function]}
+      >
+        <h2
+          className="action-card-title"
+        >
+          BJ's Wholesale Club
+           (
+          BJ
+          )
+        </h2>
+        <p
+          className="action-card-company"
+        >
+          BJ\`s Wholesale Club Holdings Inc
+        </p>
+        <p
+          className="action-card-price"
+        >
+          $
+          45
+        </p>
+      </div>
+    </a>
+    <a
+      href="/action_detail/4"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "none",
+        }
+      }
+    >
+      <div
+        className="action-card"
+        data-testid="action-card-id-4"
+        onClick={[Function]}
+      >
+        <h2
+          className="action-card-title"
+        >
+          Gamestop
+           (
+          GME
+          )
+        </h2>
+        <p
+          className="action-card-company"
+        >
+          Gamestop Corporation
+        </p>
+        <p
+          className="action-card-price"
+        >
+          $
+          176
+        </p>
+      </div>
+    </a>
+    <a
+      href="/action_detail/5"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "none",
+        }
+      }
+    >
+      <div
+        className="action-card"
+        data-testid="action-card-id-5"
+        onClick={[Function]}
+      >
+        <h2
+          className="action-card-title"
+        >
+          Tesla
+           (
+          TSLA
+          )
+        </h2>
+        <p
+          className="action-card-company"
+        >
+          Tesla Inc
+        </p>
+        <p
+          className="action-card-price"
+        >
+          $
+          580
+        </p>
+      </div>
+    </a>
+  </div>
+  <div
+    className="search-unknown"
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  >
+    Unable to find the action you were looking for
+  </div>
+</div>
+`;

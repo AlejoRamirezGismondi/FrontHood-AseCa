@@ -19,8 +19,8 @@ class Search extends Component {
         if(actions.length > 0){
             this.state.showMessage = false
             this.actionList = actions.map((item) =>
-                <Link to={`/action_detail/${item.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                    <div className="action-card" key={item.id} onClick={() => this.viewDetails(item.id)}>
+                <Link to={`/action_detail/${item.id}`} style={{ color: 'inherit', textDecoration: 'none' }} key={item.id}>
+                    <div className="action-card" data-testid={"action-card-id-"+item.id} key={item.id} onClick={() => this.viewDetails(item.id)}>
                         <h2 className="action-card-title">{item.action_name} ({item.symbol})</h2>
                         <p className="action-card-company">{item.company_name}</p>
                         <p className="action-card-price">${item.price}</p>
@@ -37,7 +37,7 @@ class Search extends Component {
         return (
             <div>
                 <SearchBar/>
-                <div className="container">
+                <div className="container" data-testid={"search-container-id"}>
                     {this.showActionList()}
                 </div>
                 <div className="search-unknown"
