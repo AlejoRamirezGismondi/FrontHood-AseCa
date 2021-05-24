@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ActionDetails from '../../ActionDetails/ActionDetails'
+import TestExample from '../../TestExample/TestExample'
 import {cleanup, render} from "@testing-library/react";
 import renderer from 'react-test-renderer';
 import { fireEvent } from '@testing-library/react';
