@@ -9,8 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import {Button, IconButton, Link} from "@material-ui/core";
+import {Button, IconButton} from "@material-ui/core";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import DetailTable from "../DetailTable/DetailTable";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     overflow: 'auto',
     flexDirection: 'column',
-    background: "lightslategray"
+    background: "lightgray"
   },
   fixedHeight: {
     height: 240,
@@ -82,6 +83,12 @@ const ActionDetails = () => {
                 <Button variant="contained" color="primary">
                   Comprar
                 </Button>
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <h2>Detalles</h2>
+                <DetailTable />
               </Paper>
             </Grid>
             <Grid item xs={12}>
