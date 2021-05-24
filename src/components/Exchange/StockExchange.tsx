@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Stock} from "../Models/Stock";
 
 type Props = {
@@ -6,6 +6,16 @@ type Props = {
 }
 
 const StockExchange = (props: Props) => {
+    const [value, setValue] = useState<number>();
+
+    function handleChange(event) {
+        setValue(event.target.value);
+    }
+
+    function submitBuy() {
+
+    }
+
     return (
         <div>
             <div>
@@ -17,7 +27,8 @@ const StockExchange = (props: Props) => {
             </div>
 
             <form>
-                <input type='text' />
+                <input type='text' placeholder={'amount'} value={value} onChange={handleChange}/>
+                <button onClick={submitBuy}>Buy!</button>
             </form>
         </div>
     )
