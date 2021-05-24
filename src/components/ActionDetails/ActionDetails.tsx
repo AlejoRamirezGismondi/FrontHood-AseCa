@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Chart from "../Chart/Chart";
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
@@ -12,6 +12,10 @@ import Paper from '@material-ui/core/Paper';
 import {Button, IconButton} from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DetailTable from "../DetailTable/DetailTable";
+import {Stock} from "../Models/Stock";
+import StockExchange from "../Exchange/StockExchange";
+import {Receipt} from "../Models/Receipt";
+import ReceiptView from "../Exchange/ReceiptView";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +52,37 @@ const useStyles = makeStyles((theme) => ({
 
 const ActionDetails = () => {
   const classes = useStyles();
+  const [input, setInput] = useState<string>();
+  const [stock, setStock] = useState<Stock>({
+    name: 'the Company X',
+    symbol:'HOL',
+    marketOpen:new Date(Date.now()),
+    marketClose:new Date(Date.now()),
+    type: 'type',
+    region: 'LA',
+    timezone: 'UTC-3',
+    currency: 'USD',
+  });
+
+  const removeDollarSign = (value) => (value[0] === '$' ? value.slice(1) : value)
+  const getReturnValue = (value) => (value === '' ? '' : `$${value}`)
+
+  const [openDrawer, setOpenDrawer] = useState<boolean>(false)
+  const [openReceiptView, setOpenReceiptView] = useState<boolean>(false)
+  const [receipt, setReceipt] = useState<Receipt>({id:0, userId: 0, stockBought:0, stockSymbol:'', price:0})
+
+  const handleOpenDrawer = () => {
+    setOpenDrawer(true)
+  }
+
+
+  const handleBuy = (price: number, amount: number) => {
+    //TODO buy request
+    setOpenDrawer(false)
+    setReceipt({id: 2, userId: 1, price: price, stockBought: amount, stockSymbol: stock.symbol})
+    setOpenReceiptView(true);
+
+  }
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -80,7 +115,7 @@ const ActionDetails = () => {
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <h2 data-testid={"actual-price-id"}>Precio Actual:</h2>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={handleOpenDrawer}>
                   Comprar
                 </Button>
               </Paper>
@@ -99,6 +134,8 @@ const ActionDetails = () => {
           </Grid>
         </Container>
       </main>
+      <StockExchange stock={stock} open={openDrawer} onClose={handleBuy}/>
+      <ReceiptView receipt={receipt} open={openReceiptView} onClose={() => setOpenReceiptView(false)}/>
     </div>
   );
 }

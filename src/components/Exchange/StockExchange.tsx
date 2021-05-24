@@ -1,44 +1,54 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Stock} from "../Models/Stock";
 import Drawer from 'react-drag-drawer';
 import './StockExchange.css';
+import {get} from "../http";
+import {Button} from "@material-ui/core";
 
 type Props = {
     stock: Stock,
     open: boolean,
-    onClose: () => void,
+    onClose: (price: number, amount: number) => void,
 }
 
 const StockExchange = (props: Props) => {
-    const [value, setValue] = useState<number>();
+  const [price, setPrice] = useState<number>();
+  const [amount, setAmount] = useState<number>();
 
-    function handleChange(event) {
-        setValue(event.target.value);
-    }
+  function handleChange(event) {
+    setAmount(event.target.value);
+  }
 
-    function submitBuy() {
-        props.onClose();
-    }
+  useEffect(() => {
+    get(props.stock.symbol)
+      .then(res => setPrice(res))
+  }, [])
 
-    return (
-        <Drawer open={props.open} onRequestClose={props.onClose} className={'buy-drawer'}>
-          {/*stock info*/}
-            <div>
-                <h1>{props.stock.symbol}</h1>
-                <h2>{props.stock.exchange}</h2>
-            </div>
-            <div>
-                <h1>{props.stock.open}</h1>
-            </div>
+  function submitBuy() {
+    props.onClose(price, amount);
+  }
 
-          {/*user info*/}
-
-            <form>
-                <input type='text' placeholder={'amount'} value={value} onChange={handleChange}/>
-                <button onClick={submitBuy}>Buy!</button>
-            </form>
-        </Drawer>
-    )
+  return (
+    <div>
+      <Drawer open={props.open} onRequestClose={props.onClose} >
+        <div className={'buy-drawer'}>
+        <div>
+          <h1 data-testid={"stock-name-id"}>{props.stock.name}</h1>
+          <h2 data-testid={"stock-symbol-id"}>{props.stock.symbol}</h2>
+        </div>
+        <div>
+          <h1>Precio actual: {price} {props.stock.currency}</h1>
+        </div>
+        <form>
+          <p>Ingrese la cantidad que desee comprar: </p>
+          <input type='text' placeholder={'amount'} value={amount} onChange={handleChange}/>
+          <p>SubTotal: {amount * price}</p>
+          <Button variant="contained" color="primary" onClick={submitBuy}> Comprar </Button>
+        </form>
+        </div>
+      </Drawer>
+    </div>
+  )
 }
 
 export default StockExchange;

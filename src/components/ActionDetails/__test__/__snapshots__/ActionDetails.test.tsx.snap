@@ -44,6 +44,7 @@ exports[`should match snapshot 1`] = `
       </a>
       <h1
         className="MuiTypography-root makeStyles-title-3 MuiTypography-h6 MuiTypography-colorInherit MuiTypography-noWrap"
+        data-testid="action-name-id"
       >
         Nombre de la accion
       </h1>
@@ -91,13 +92,16 @@ exports[`should match snapshot 1`] = `
           <div
             className="MuiPaper-root makeStyles-paper-7 makeStyles-fixedHeight-8 MuiPaper-elevation1 MuiPaper-rounded"
           >
-            <h2>
+            <h2
+              data-testid="actual-price-id"
+            >
               Precio Actual:
             </h2>
             <button
               className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
               disabled={false}
               onBlur={[Function]}
+              onClick={[Function]}
               onDragLeave={[Function]}
               onFocus={[Function]}
               onKeyDown={[Function]}
@@ -390,5 +394,6 @@ exports[`should match snapshot 1`] = `
       </div>
     </div>
   </main>
+  <div />
 </div>
 `;
