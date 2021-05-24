@@ -9,7 +9,6 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={"/buy"} component={forActionBuy}/>
         <Route path={"/search"} exact component={Search}/>
         <Route path={"/"} exact component={ActionDetails}/>
       </Switch>
@@ -19,24 +18,24 @@ const Router = () => {
 
 const forActionBuy = () => {
 
-    const mockStock = {
-        date: new Date(),
-        name: 'Some Company',
-        symbol: "HOL",
-        exchange: "NOW",
-        open: 10,
-        high: 11,
-        low: 9,
-        close: 2,
-        last: 14,
-        volume: 13000
-    }
-
-    return (
-        <div>
-            <StockExchange stock={mockStock}/>
-        </div>
-    )
+    // const mockStock = {
+    //     date: new Date(),
+    //     name: 'Some Company',
+    //     symbol: "HOL",
+    //     exchange: "NOW",
+    //     open: 10,
+    //     high: 11,
+    //     low: 9,
+    //     close: 2,
+    //     last: 14,
+    //     volume: 13000
+    // }
+    //
+    // return (
+    //     <div>
+    //         <StockExchange stock={mockStock}/>
+    //     </div>
+    // )
 }
 
 export default Router;
