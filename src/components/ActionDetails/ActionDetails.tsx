@@ -10,7 +10,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import {Button, IconButton} from "@material-ui/core";
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DetailTable from "../DetailTable/DetailTable";
 
 const useStyles = makeStyles((theme) => ({
