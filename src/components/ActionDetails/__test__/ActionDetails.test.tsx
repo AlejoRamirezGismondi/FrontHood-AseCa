@@ -1,4 +1,4 @@
-import {cleanup} from "@testing-library/react";
+import {cleanup, render} from "@testing-library/react";
 import ReactDOM from "react-dom";
 import React from "react";
 import ActionDetails from "../ActionDetails";
@@ -11,7 +11,18 @@ it("renders without crashing", () => {
   ReactDOM.render(<ActionDetails/>, div);
 });
 
-it('should match snapshot', function () {
+it('should match snapshot', () => {
   const tree = renderer.create(<ActionDetails/>).toJSON();
   expect(tree).toMatchSnapshot();
 });
+
+it('should contain its name', () => {
+  const { getByTestId } = render(<ActionDetails/>);
+  expect(getByTestId("action-name-id")).toHaveTextContent("Nombre de la accion")
+});
+
+it('should contain its actual price', () => {
+  const { getByTestId } = render(<ActionDetails/>);
+  expect(getByTestId("action-name-id")).toHaveTextContent("Precio Actual:")
+});
+

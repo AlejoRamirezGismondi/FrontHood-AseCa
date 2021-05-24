@@ -63,7 +63,7 @@ const ActionDetails = () => {
           >
             <ChevronLeftIcon/>
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+          <Typography data-testid={"action-name-id"} component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
             Nombre de la accion
           </Typography>
         </Toolbar>
@@ -79,7 +79,7 @@ const ActionDetails = () => {
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <h2>Precio Actual:</h2>
+                <h2 data-testid={"actual-price-id"}>Precio Actual:</h2>
                 <Button variant="contained" color="primary">
                   Comprar
                 </Button>
