@@ -30,7 +30,7 @@ const rows = [
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
     root: {
-      backgroundColor: theme.palette.primary.dark
+      backgroundColor: theme.palette.primary.main
     },
   }),
 )(TableRow);

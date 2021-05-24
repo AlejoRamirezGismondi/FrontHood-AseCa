@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     background: "lightgray"
   },
+  buyButton: {
+
+  },
   fixedHeight: {
     height: 240,
   },
@@ -60,6 +63,7 @@ const ActionDetails = () => {
             edge="start"
             color="inherit"
             href={"/"}
+            data-testid={"return-button-id"}
           >
             <ChevronLeftIcon/>
           </IconButton>

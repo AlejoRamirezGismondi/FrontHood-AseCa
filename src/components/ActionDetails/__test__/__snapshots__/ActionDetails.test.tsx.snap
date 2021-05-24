@@ -13,6 +13,7 @@ exports[`should match snapshot 1`] = `
       <a
         aria-disabled={false}
         className="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit MuiIconButton-edgeStart"
+        data-testid="return-button-id"
         href="/"
         onBlur={[Function]}
         onDragLeave={[Function]}
@@ -44,6 +45,7 @@ exports[`should match snapshot 1`] = `
       </a>
       <h1
         className="MuiTypography-root makeStyles-title-3 MuiTypography-h6 MuiTypography-colorInherit MuiTypography-noWrap"
+        data-testid="action-name-id"
       >
         Nombre de la accion
       </h1>
@@ -65,7 +67,7 @@ exports[`should match snapshot 1`] = `
           className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-8 MuiGrid-grid-lg-9"
         >
           <div
-            className="MuiPaper-root makeStyles-paper-7 makeStyles-fixedHeight-8 MuiPaper-elevation1 MuiPaper-rounded"
+            className="MuiPaper-root makeStyles-paper-7 makeStyles-fixedHeight-9 MuiPaper-elevation1 MuiPaper-rounded"
           >
             <div
               className="header"
@@ -89,13 +91,15 @@ exports[`should match snapshot 1`] = `
           className="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-4 MuiGrid-grid-lg-3"
         >
           <div
-            className="MuiPaper-root makeStyles-paper-7 makeStyles-fixedHeight-8 MuiPaper-elevation1 MuiPaper-rounded"
+            className="MuiPaper-root makeStyles-paper-7 makeStyles-fixedHeight-9 MuiPaper-elevation1 MuiPaper-rounded"
           >
-            <h2>
+            <h2
+              data-testid="actual-price-id"
+            >
               Precio Actual:
             </h2>
             <button
-              className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary"
+              className="MuiButtonBase-root MuiButton-root MuiButton-contained makeStyles-buyButton-8 MuiButton-containedPrimary"
               disabled={false}
               onBlur={[Function]}
               onDragLeave={[Function]}
@@ -133,7 +137,7 @@ exports[`should match snapshot 1`] = `
             >
               <table
                 aria-label="a dense table"
-                className="MuiTable-root makeStyles-table-9"
+                className="MuiTable-root makeStyles-table-10"
                 color="black"
                 role={null}
               >
@@ -142,7 +146,7 @@ exports[`should match snapshot 1`] = `
                   role={null}
                 >
                   <tr
-                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-10 MuiTableRow-head"
+                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-11 MuiTableRow-head"
                     role={null}
                   >
                     <th
@@ -187,7 +191,7 @@ exports[`should match snapshot 1`] = `
                   role={null}
                 >
                   <tr
-                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-10"
+                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-11"
                     role={null}
                   >
                     <th
@@ -224,7 +228,7 @@ exports[`should match snapshot 1`] = `
                     </td>
                   </tr>
                   <tr
-                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-10"
+                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-11"
                     role={null}
                   >
                     <th
@@ -261,7 +265,7 @@ exports[`should match snapshot 1`] = `
                     </td>
                   </tr>
                   <tr
-                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-10"
+                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-11"
                     role={null}
                   >
                     <th
@@ -298,7 +302,7 @@ exports[`should match snapshot 1`] = `
                     </td>
                   </tr>
                   <tr
-                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-10"
+                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-11"
                     role={null}
                   >
                     <th
@@ -335,7 +339,7 @@ exports[`should match snapshot 1`] = `
                     </td>
                   </tr>
                   <tr
-                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-10"
+                    className="MuiTableRow-root WithStyles(ForwardRef(TableRow))-root-11"
                     role={null}
                   >
                     <th
