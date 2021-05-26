@@ -16,6 +16,7 @@ import {Stock} from "../Models/Stock";
 import StockExchange from "../Exchange/StockExchange";
 import {Receipt} from "../Models/Receipt";
 import ReceiptView from "../Exchange/ReceiptView";
+import {put} from "../http";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,12 +77,14 @@ const ActionDetails = () => {
   }
 
 
-  const handleBuy = (price: number, amount: number) => {
-    //TODO buy request
+  const handleBuy = (price: number, amount: number, didBuy:boolean) => {
     setOpenDrawer(false)
-    setReceipt({id: 2, userId: 1, price: price, stockBought: amount, stockSymbol: stock.symbol})
-    setOpenReceiptView(true);
-
+    if(didBuy) {
+      put('1/' + stock.symbol + '/' + amount, {}).then(() => {
+        setReceipt({id: 2, userId: 1, price: price, stockBought: amount, stockSymbol: stock.symbol})
+        setOpenReceiptView(true);
+      }).catch(err => console.log(err))
+    }
   }
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);

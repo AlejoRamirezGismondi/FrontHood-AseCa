@@ -29,7 +29,7 @@ it("renders without crashing", () => {
 })
 
 it('should match snapshot', function (){
-  const tree = renderer.create(<StockExchange onClose={()=>{}} open stock={{
+  const tree = renderer.create(<StockExchange onClose={()=>{console.log('something')}} open={true} stock={{
     symbol:'QQQ',
     name: 'NAME',
     type: 'type',
