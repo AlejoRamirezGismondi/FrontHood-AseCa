@@ -1,3 +1,17 @@
 .buy-drawer {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 10px;
+    color: #282c34;
+}
+
+.receipt-drawer {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 10px;
+    color: #282c34;
+}
+
+.buy-drawer-background{
     background-color: #bbbbbb;
 }

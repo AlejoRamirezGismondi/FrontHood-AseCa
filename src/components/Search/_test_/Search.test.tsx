@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TestExample from '../../TestExample/TestExample'
 import {cleanup, render} from "@testing-library/react";
 import renderer from 'react-test-renderer';
 import { fireEvent } from '@testing-library/react';
@@ -24,6 +23,7 @@ it('should render input with place holder Search Action', function () {
 it('should console log something when button is clicked', function () {
     const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);
     const consoleSpy = jest.spyOn(console, 'log');
+    //TODO hacerlo con un id posta
     const action_card = getByTestId("action-card-id-1")
     fireEvent.click(action_card);
     expect(consoleSpy).toHaveBeenCalledWith(1);
@@ -43,6 +43,7 @@ it('should match snapshot', function () {
     expect(tree).toMatchSnapshot();
 });
 
+//TODO hacerlo con un id posta
 it('action card should have Name, Code, Company and Price', () => {
     const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);
     // @ts-ignore
@@ -61,6 +62,7 @@ it('action card should have Name, Code, Company and Price', () => {
 
 });
 
+//TODO hacerlo con un id posta
 it('should redirect to specific Action when action-card is clicked', () => {
     const redirectUrl = '/action_detail/1'
     const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);

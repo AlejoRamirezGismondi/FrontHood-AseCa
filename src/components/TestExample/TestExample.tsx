@@ -8,16 +8,14 @@ const TestExample = () => {
   console.log(slug.id);
   const [input, setInput] = useState<string>();
   const [stock, setStock] = useState<Stock>({
-    name: 'the Company X',
-    open: 123,
-    close: 345,
-    high: 500,
-    low: 98,
-    last: 234,
-    symbol: 'TC',
-    volume: 34567,
-    exchange: 'QWE',
-    date: new Date(Date.now())
+    marketOpen: new Date(),
+    marketClose: new Date(),
+    name: "Some Company",
+    symbol: "SAC",
+    type: "In",
+    region: "LA",
+    timezone: "UTC-3",
+    currency: "USD",
   });
 
   const removeDollarSign = (value) => (value[0] === '$' ? value.slice(1) : value)
