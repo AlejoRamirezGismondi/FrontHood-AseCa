@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import Chart from "../Chart/Chart";
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
@@ -17,6 +18,7 @@ import StockExchange from "../Exchange/StockExchange";
 import {Receipt} from "../Models/Receipt";
 import ReceiptView from "../Exchange/ReceiptView";
 import {put} from "../http";
+import {useToasts} from 'react-toast-notifications'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,10 +58,12 @@ const useStyles = makeStyles((theme) => ({
 
 const ActionDetails = () => {
   const classes = useStyles();
+  const { addToast } = useToasts();
+  const history = useHistory();
   const [input, setInput] = useState<string>();
   const [stock, setStock] = useState<Stock>({
     name: 'the Company X',
-    symbol:'HOL',
+    symbol:'AG8.FRK',
     marketOpen:new Date(Date.now()),
     marketClose:new Date(Date.now()),
     type: 'type',
@@ -86,7 +90,12 @@ const ActionDetails = () => {
       put('1/' + stock.symbol + '/' + amount, {}).then(() => {
         setReceipt({id: 2, userId: 1, price: price, stockBought: amount, stockSymbol: stock.symbol})
         setOpenReceiptView(true);
-      }).catch(err => console.log(err))
+      }).catch(err => {
+        debugger
+        console.log(err)
+        addToast("Not enough funds!", { appearance: 'error' });
+        history.push("/deposit")
+      })
     }
   }
 
