@@ -24,9 +24,9 @@ it('should console log something when button is clicked', function () {
     const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);
     const consoleSpy = jest.spyOn(console, 'log');
     //TODO hacerlo con un id posta
-    const action_card = getByTestId("action-card-id-1")
+    const action_card = getByTestId("action-card-id-ADBE")
     fireEvent.click(action_card);
-    expect(consoleSpy).toHaveBeenCalledWith(1);
+    expect(consoleSpy).toHaveBeenCalledWith("ADBE");
 });
 
 it('there should be actions in the menu', function () {
@@ -44,30 +44,26 @@ it('should match snapshot', function () {
 });
 
 //TODO hacerlo con un id posta
-it('action card should have Name, Code, Company and Price', () => {
+it('action card should have Name, Code, Company and Score', () => {
     const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);
     // @ts-ignore
-    const actionCard = getByTestId("action-card-id-1");
+    const actionCard = getByTestId("action-card-id-ADBE");
     const title = actionCard.children.item(0).textContent
     const company = actionCard.children.item(1).textContent
-    const price = actionCard.children.item(2).textContent
+    const score = actionCard.children.item(2).textContent
 
     expect(title).not.toBeUndefined()
     expect(company).not.toBeUndefined()
-    expect(price).not.toBeUndefined()
-
-    expect(title).toContain('(')
-    expect(title).toContain(')')
-    expect(price).toContain('$')
+    expect(score).not.toBeUndefined()
 
 });
 
 //TODO hacerlo con un id posta
 it('should redirect to specific Action when action-card is clicked', () => {
-    const redirectUrl = '/action_detail/1'
+    const redirectUrl = '/action_detail/ADBE'
     const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);
-    const action_card = getByTestId("action-card-id-1")
+    const action_card = getByTestId("action-card-id-ADBE")
     fireEvent.click(action_card);
-    expect(window.location.href).toBe('http://localhost/action_detail/1')
+    expect(window.location.href).toBe('http://localhost/action_detail/ADBE')
 })
 
