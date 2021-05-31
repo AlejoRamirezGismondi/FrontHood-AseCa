@@ -2,12 +2,14 @@ import React from 'react';
 import './App.css';
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import Router from './components/Router/Router';
+import {ToastContainer} from "react-toastify";
+import {ToastProvider} from "react-toast-notifications";
 
 const theme = createMuiTheme({
   palette: {
     primary: {
       light: '#a6e9f2',
-      main: 'rgb(0, 200, 0)',
+      main: 'rgb(0, 160, 0)',
       dark: 'rgb(0, 50, 0)',
       contrastText: '#e8e8e8',
     },
@@ -35,9 +37,11 @@ const theme = createMuiTheme({
 function App() {
   return (
     <div className="App">
-      <MuiThemeProvider theme={theme}>
-        <Router/>
-      </MuiThemeProvider>
+      <ToastProvider>
+        <MuiThemeProvider theme={theme}>
+          <Router/>
+        </MuiThemeProvider>
+      </ToastProvider>
     </div>
   );
 }

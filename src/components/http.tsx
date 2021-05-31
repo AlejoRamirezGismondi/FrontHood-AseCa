@@ -28,7 +28,6 @@ const request = (url: string, method: string, body: Object | null, config: Confi
         })
         // Catch connection errors and the error throw above.
         .catch(error => {
-            debugger
             throw(error)
         })
 }

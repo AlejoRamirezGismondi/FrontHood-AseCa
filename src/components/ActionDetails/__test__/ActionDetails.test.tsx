@@ -1,28 +1,21 @@
-import {cleanup, render} from "@testing-library/react";
-import ReactDOM from "react-dom";
-import React from "react";
 import ActionDetails from "../ActionDetails";
-import renderer from 'react-test-renderer';
+import React from 'react';
+import ReactDOM from "react-dom";
+import {getByTestId} from "@testing-library/react";
 
-afterEach(cleanup);
+let root;
 
-it("renders without crashing", () => {
+beforeAll(() => {
   const div = document.createElement("div");
-  ReactDOM.render(<ActionDetails/>, div);
-});
+  ReactDOM.render(
+    <ActionDetails/>, div);
+  root = div;
+})
 
-it('should match snapshot', () => {
-  const tree = renderer.create(<ActionDetails/>).toJSON();
-  expect(tree).toMatchSnapshot();
-});
-
-it('should contain its name', () => {
-  const { getByTestId } = render(<ActionDetails/>);
-  expect(getByTestId("action-name-id")).toHaveTextContent("Nombre de la accion")
+it('should contain name', function () {
+  expect(getByTestId(root, "action-name-id")).toHaveTextContent("Nombre de la accion");
 });
 
 it('should contain its actual price', () => {
-  const { getByTestId } = render(<ActionDetails/>);
-  expect(getByTestId("action-name-id")).toHaveTextContent("Precio Actual:")
+  expect(getByTestId(root, "actual-price-id")).toHaveTextContent("Precio Actual:");
 });
-
