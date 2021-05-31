@@ -4,9 +4,20 @@ import mock_actions from "./fake_action_data"
 import {Link} from "react-router-dom"
 import SearchBar from "./SearchBar";
 import {get} from "../http"
+import {BrowserRouter} from 'react-router-dom';
 
 class Search extends Component {
 
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showMessage: false,
+            searchInput: "",
+            actions: mock_actions.actions_mock
+        };
+    }
     actionList;
 
     state = {
@@ -19,6 +30,12 @@ class Search extends Component {
         console.log(id)
     }
 
+    handleSearch(){
+        this.fakeSearchStocks()
+        // @ts-ignore
+        console.log(this.state.searchInput)
+    }
+
     filterBySearchInput(input){
         if(input.length > 1 && input.length <= 30){
             this.setState({ searchInput: input });
@@ -28,6 +45,7 @@ class Search extends Component {
     }
 
     searchStocks(){
+        // @ts-ignore
         get(this.state.searchInput)
             .then(res => {
                 this.updateActions(res)
@@ -40,7 +58,6 @@ class Search extends Component {
     }
 
     showActions(){
-        console.log("Show Actions")
         this.actionList = this.state.actions.map((item) =>
             <Link to={`/action_detail/${item["1. symbol"]}`}
                   style={{ color: 'inherit', textDecoration: 'none' }}
@@ -61,7 +78,6 @@ class Search extends Component {
     * TODO swap with showActions
     */
     showFilteredActions(){
-        console.log("Show Actions")
         this.actionList = this.state.actions.filter(
             item =>
                 item["symbol"].includes(this.state.searchInput) ||
@@ -79,13 +95,12 @@ class Search extends Component {
     }
 
     updateActions(data){
-        console.log(this.state.actions)
         this.setState({ actions: data.bestMatches })
 
     }
 
     showActionList() {
-        console.log("Show Action List")
+
         if(this.state.actions.length > 0){
             this.state.showMessage = false
             this.showActions()
@@ -99,7 +114,7 @@ class Search extends Component {
         return (
             <div>
                 <SearchBar handleSearch={input => this.filterBySearchInput(input)}
-                handleSubmit={() => this.fakeSearchStocks()}/>
+                           handleSubmit={() => this.handleSearch()}/>
                 <div className="container" data-testid={"search-container-id"}>
                     {this.showActionList()}
                 </div>
