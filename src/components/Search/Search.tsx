@@ -54,6 +54,7 @@ class Search extends Component {
 
     fakeSearchStocks(){
         console.log("Fake Search Stocks")
+        console.log(this.state.searchInput)
         this.updateActions(mock_actions.actions_mock_search_api)
     }
 

@@ -18,6 +18,7 @@ function SearchBar(props) {
                 />
             </div>
             <button
+                data-testid={"search-button-id"}
                 type="submit"
                 onClick={() => props.handleSubmit()}
                 value="Search">
