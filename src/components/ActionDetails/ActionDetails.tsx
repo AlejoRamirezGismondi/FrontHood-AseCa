@@ -91,7 +91,6 @@ const ActionDetails = () => {
         setReceipt({id: 2, userId: 1, price: price, stockBought: amount, stockSymbol: stock.symbol})
         setOpenReceiptView(true);
       }).catch(err => {
-        debugger
         console.log(err)
         addToast("Not enough funds!", { appearance: 'error' });
         history.push("/deposit")
