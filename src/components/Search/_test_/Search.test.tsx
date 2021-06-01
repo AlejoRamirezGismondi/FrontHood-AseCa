@@ -5,6 +5,7 @@ import renderer from 'react-test-renderer';
 import { fireEvent } from '@testing-library/react';
 import Search from "../Search";
 import {BrowserRouter} from 'react-router-dom';
+import SearchBar from "../SearchBar";
 
 afterEach(cleanup);
 
@@ -19,14 +20,40 @@ it('should render input with place holder Search Action', function () {
     expect(getByTestId("search-input-id")).toHaveProperty("placeholder", "Search Action")
 });
 
+it('should render input with max length 30 and min length 2', function () {
+    const { getByTestId } = render(<SearchBar/>);
+    const input = getByTestId("search-input-id")
+    expect(input).toHaveProperty("maxLength", 30)
+    expect(input).toHaveProperty("minLength", 2)
+});
 
-it('should console log something when button is clicked', function () {
+
+
+/*it('', function () {
+    const component = render(<BrowserRouter><Search/></BrowserRouter>)
+    //why undefine?
+    //console.log(component.state)
+    //expect(component.state.searchInput).toBe('')
+});*/
+
+
+
+it('should console log something action card is clicked', function () {
     const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);
     const consoleSpy = jest.spyOn(console, 'log');
     //TODO hacerlo con un id posta
-    const action_card = getByTestId("action-card-id-1")
+    const action_card = getByTestId("action-card-id-ADBE")
     fireEvent.click(action_card);
-    expect(consoleSpy).toHaveBeenCalledWith(1);
+    expect(consoleSpy).toHaveBeenCalledWith("ADBE");
+});
+
+it('should console log something when search button is clicked', function () {
+    const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);
+    const consoleSpy = jest.spyOn(console, 'log');
+    //TODO hacerlo con un id posta
+    const action_card = getByTestId("search-button-id")
+    fireEvent.click(action_card);
+    expect(consoleSpy).toHaveBeenCalledWith("Fake Search Stocks");
 });
 
 it('there should be actions in the menu', function () {
@@ -43,31 +70,27 @@ it('should match snapshot', function () {
     expect(tree).toMatchSnapshot();
 });
 
-//TODO hacerlo con un id posta
-it('action card should have Name, Code, Company and Price', () => {
+
+it('action card should have Name, Code, Company and Score', () => {
     const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);
     // @ts-ignore
-    const actionCard = getByTestId("action-card-id-1");
+    const actionCard = getByTestId("action-card-id-ADBE");
     const title = actionCard.children.item(0).textContent
     const company = actionCard.children.item(1).textContent
-    const price = actionCard.children.item(2).textContent
+    const score = actionCard.children.item(2).textContent
 
     expect(title).not.toBeUndefined()
     expect(company).not.toBeUndefined()
-    expect(price).not.toBeUndefined()
-
-    expect(title).toContain('(')
-    expect(title).toContain(')')
-    expect(price).toContain('$')
+    expect(score).not.toBeUndefined()
 
 });
 
-//TODO hacerlo con un id posta
+
 it('should redirect to specific Action when action-card is clicked', () => {
-    const redirectUrl = '/action_detail/1'
+    const redirectUrl = '/action_detail/ADBE'
     const { getByTestId } = render(<BrowserRouter><Search/></BrowserRouter>);
-    const action_card = getByTestId("action-card-id-1")
+    const action_card = getByTestId("action-card-id-ADBE")
     fireEvent.click(action_card);
-    expect(window.location.href).toBe('http://localhost/action_detail/1')
+    expect(window.location.href).toBe('http://localhost/action_detail/ADBE')
 })
 
