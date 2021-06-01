@@ -57,11 +57,11 @@ const useStyles = makeStyles((theme) => ({
 
 const ActionDetails = () => {
   const classes = useStyles();
-  const [details, setDetails] = useState<StockDetails>();
+  const [details, setDetails] = useState({ name: 'juan', price: '1', dailyPrices: { day: 'hoy', price: '2'}});
   const [input, setInput] = useState<string>();
   const [stock, setStock] = useState<Stock>({
     name: 'the Company X',
-    symbol:'HOL',
+    symbol:'AG8.FRK',
     marketOpen:new Date(Date.now()),
     marketClose:new Date(Date.now()),
     type: 'type',

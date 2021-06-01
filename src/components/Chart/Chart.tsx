@@ -13,14 +13,14 @@ const options = {
   },
 };
 
-const Chart = props => {
+const Chart = (props) => {
 
   const data = {
-    labels: props.map((k, _) => k),
+    labels: ['1', '2'],
     datasets: [
       {
         label: 'Price',
-        data: props.map((_, v) => v),
+        data: ['1', '2'],
         fill: false,
         backgroundColor: 'rgb(0, 200, 0)',
         borderColor: 'rgba(0, 200, 0, 0.2)',

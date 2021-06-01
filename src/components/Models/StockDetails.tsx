@@ -11,5 +11,6 @@ export type StockDetails = {
 }
 
 export type Price = {
-
+  date: string,
+  value: string
 }

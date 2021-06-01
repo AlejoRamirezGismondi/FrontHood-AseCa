@@ -20,7 +20,7 @@ const StockExchange = (props: Props) => {
     changePercent: 0,
     high: 0,
     latestTradingDay: new Date(),
-    symbol: '', low: 0, open: 0, previousClose: 0, volume: 0})
+    symbol: '', low: 0, open: 0, previousClose: 0, volume: 0});
 
   function handleChange(event) {
     setAmount(event.target.value);
@@ -31,6 +31,7 @@ const StockExchange = (props: Props) => {
       .then(res => {
         setCurrentInfo(res)
         setPrice(res.price)
+        console.log(res);
       })
   }, [])
 
