@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Chart from "../Chart/Chart";
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
@@ -16,7 +16,8 @@ import {Stock} from "../Models/Stock";
 import StockExchange from "../Exchange/StockExchange";
 import {Receipt} from "../Models/Receipt";
 import ReceiptView from "../Exchange/ReceiptView";
-import {put} from "../http";
+import {get, put} from "../http";
+import {StockDetails} from "../Models/StockDetails";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ActionDetails = () => {
   const classes = useStyles();
+  const [details, setDetails] = useState<StockDetails>();
   const [input, setInput] = useState<string>();
   const [stock, setStock] = useState<Stock>({
     name: 'the Company X',
@@ -68,8 +70,12 @@ const ActionDetails = () => {
     currency: 'USD',
   });
 
-  const removeDollarSign = (value) => (value[0] === '$' ? value.slice(1) : value)
-  const getReturnValue = (value) => (value === '' ? '' : `$${value}`)
+  useEffect(() => {
+    get("stats/" + stock.symbol).then(response => {
+      setDetails(response.data);
+      console.log(response.data);
+    });
+  }, [details, stock.symbol]);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [openReceiptView, setOpenReceiptView] = useState<boolean>(false)
@@ -78,7 +84,6 @@ const ActionDetails = () => {
   const handleOpenDrawer = () => {
     setOpenDrawer(true)
   }
-
 
   const handleBuy = (price: number, amount: number, didBuy:boolean) => {
     setOpenDrawer(false)
@@ -91,6 +96,8 @@ const ActionDetails = () => {
   }
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  if (!details || !stock) return(<div> Loading Data... </div>);
 
   return (
     <div className={classes.root}>
@@ -106,7 +113,7 @@ const ActionDetails = () => {
             <ChevronLeftIcon/>
           </IconButton>
           <Typography data-testid={"action-name-id"} component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Nombre de la accion
+            Nombre de la accion: {stock.name}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -116,12 +123,12 @@ const ActionDetails = () => {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Chart/>
+                <Chart props={details.dailyPrices}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <h2 data-testid={"actual-price-id"}>Precio Actual:</h2>
+                <h2 data-testid={"actual-price-id"}>Precio Actual: {details.price}</h2>
                 <Button variant="contained" color="primary" onClick={handleOpenDrawer}>
                   Comprar
                 </Button>
@@ -130,7 +137,7 @@ const ActionDetails = () => {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <h2>Detalles</h2>
-                <DetailTable />
+                <DetailTable data={details} />
               </Paper>
             </Grid>
             <Grid item xs={12}>
