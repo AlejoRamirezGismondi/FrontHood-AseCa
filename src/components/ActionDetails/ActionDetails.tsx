@@ -155,7 +155,7 @@ const ActionDetails = () => {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <h2>Detalles</h2>
-                <DetailTable data={details}/>
+                <DetailTable details={details} stock={stock}/>
               </Paper>
             </Grid>
             {/* TODO Esto nos tenemos que acordar de eliminarlo!! Hay que preguntar antes porque esta en nuestra primer entrega*/}
