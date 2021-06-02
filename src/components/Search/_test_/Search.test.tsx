@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {cleanup, render} from "@testing-library/react";
 import renderer from 'react-test-renderer';
-import { fireEvent } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import Search from "../Search";
 import {BrowserRouter} from 'react-router-dom';
 import SearchBar from "../SearchBar";
@@ -40,9 +40,13 @@ describe('Search setup', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it('there should be actions in the menu', function () {
+    test('there should be actions in the menu after page finish loading', async () => {
         const container = getByTestId(root, "search-container-id")
-        expect(container.childElementCount).toBeGreaterThanOrEqual(1)
+        await waitFor(() => expect(container.childElementCount)
+            .toBeGreaterThanOrEqual(1), {interval:100})
+
+       /* const container = getByTestId(root, "search-container-id")
+        expect(container.childElementCount).toBeGreaterThanOrEqual(1)*/
     });
 })
 
@@ -71,31 +75,48 @@ describe('input value change', () =>{
 })
 
 describe('action cards in Search behaviour', () =>{
-    it('should console log something action card is clicked', function () {
+    it('should console log something action card is clicked', async function () {
         const consoleSpy = jest.spyOn(console, 'log');
-        const action_card = getByTestId(root,"action-card-id-TESO")
-        fireEvent.click(action_card);
-        expect(consoleSpy).toHaveBeenCalledWith("TESO");
+        const container = getByTestId(root, "search-container-id")
+        await waitFor(() => expect(container.childElementCount)
+            .toBeGreaterThanOrEqual(1),{interval:100})
+            .then( () => {
+            const action_card = getByTestId(root,"action-card-id-TESO")
+            fireEvent.click(action_card);
+            expect(consoleSpy).toHaveBeenCalledWith("TESO");
+        })
     });
 
-    it('action card should have Name, Code, Company and Score', () => {
-        // @ts-ignore
-        const actionCard = getByTestId(root,"action-card-id-TESO");
-        const title = actionCard.children.item(0).textContent
-        const company = actionCard.children.item(1).textContent
-        const score = actionCard.children.item(2).textContent
+    it('action card should have Name, Code, Company and Score', async () => {
+        const container = getByTestId(root, "search-container-id")
+        await waitFor(() => expect(container.childElementCount)
+                .toBeGreaterThanOrEqual(1), {interval:100})
+            .then( () => {
+            const actionCard = getByTestId(root,"action-card-id-TESO");
+            const title = actionCard.children.item(0).textContent
+            const company = actionCard.children.item(1).textContent
+            const score = actionCard.children.item(2).textContent
 
-        expect(title).not.toBeUndefined()
-        expect(company).not.toBeUndefined()
-        expect(score).not.toBeUndefined()
+            expect(title).not.toBeUndefined()
+            expect(company).not.toBeUndefined()
+            expect(score).not.toBeUndefined()
+        })
+
+
 
     });
 
-    it('should redirect to specific Action when action-card is clicked', () => {
+    it('should redirect to specific Action when action-card is clicked', async () => {
+        const container = getByTestId(root, "search-container-id")
         const redirectUrl = '/action_detail/TESO'
-        const action_card = getByTestId(root, "action-card-id-TESO")
-        fireEvent.click(action_card);
-        expect(window.location.href).toBe('http://localhost/action_detail/TESO')
+
+        await waitFor(() => expect(container.childElementCount)
+            .toBeGreaterThanOrEqual(1), {interval:100})
+            .then( () => {
+                const action_card = getByTestId(root, "action-card-id-TESO")
+                fireEvent.click(action_card);
+                expect(window.location.href).toBe('http://localhost/action_detail/TESO')
+            })
     })
 })
 
