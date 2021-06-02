@@ -13,7 +13,7 @@ type Props = {
 
 const StockExchange = (props: Props) => {
   const [price, setPrice] = useState<number>();
-  const [amount, setAmount] = useState<number>();
+  const [amount, setAmount] = useState<number>(0);
   const [currentInfo, setCurrentInfo] = useState<StockCurrentPrice>({
     price: 0,
     change: 0,
@@ -29,9 +29,18 @@ const StockExchange = (props: Props) => {
   useEffect(() => {
     get(props.stock.symbol)
       .then(res => {
-        setCurrentInfo(res)
-        setPrice(res.price)
-        console.log(res);
+        console.log(res)
+        setPrice(res["Global Quote"]["05. price"])
+        setCurrentInfo({price,
+          change: res["Global Quote"]["09. change"],
+          changePercent:res["Global Quote"]["10. change percent"],
+          high: res["Global Quote"]["03. high"],
+          low: res["Global Quote"]["04. low"],
+          open: res["Global Quote"]["02. open"] ,
+          previousClose: res["Global Quote"]["08. previous close"],
+          latestTradingDay: res["Global Quote"]["07. latest trading day"],
+          symbol: props.stock.symbol,
+          volume: res["Global Quote"]["06. volume"]})
       })
   }, [])
 
@@ -53,8 +62,8 @@ const StockExchange = (props: Props) => {
         </div>
         <form>
           <p>Ingrese la cantidad que desee comprar: </p>
-          <input type='text' placeholder={'amount'} value={amount} onChange={handleChange}/>
-          <p>SubTotal: {amount * price}</p>
+          <input data-testid={"stock-input-id"} type='text' placeholder={'amount'} value={amount} onChange={handleChange}/>
+          <p data-testid={"total-to-buy-id"}>SubTotal: {amount * price}</p>
           <Button variant="contained" color="primary" onClick={submitBuy}> Comprar </Button>
         </form>
         </div>

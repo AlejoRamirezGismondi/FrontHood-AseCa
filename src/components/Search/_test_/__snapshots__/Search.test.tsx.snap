@@ -1,18 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should match snapshot 1`] = `
+exports[`Search setup should match snapshot 1`] = `
 <div>
   <div
     className="component-search-input"
   >
-    <input
-      data-testid="search-input-id"
-      id="action-search"
-      maxLength={30}
-      minLength={2}
-      onChange={[Function]}
-      placeholder="Search Action"
-      type="text"
+    <div
+      className="input-container"
+    >
+      <input
+        data-testid="search-input-id"
+        id="action-search"
+        maxLength={30}
+        minLength={2}
+        onChange={[Function]}
+        placeholder="Search Action"
+        type="text"
+      />
+    </div>
+    <button
+      data-testid="search-button-id"
+      onClick={[Function]}
+      type="submit"
+      value="Search"
     />
   </div>
   <div
@@ -20,7 +30,7 @@ exports[`should match snapshot 1`] = `
     data-testid="search-container-id"
   >
     <a
-      href="/action_detail/1"
+      href="/action_detail/ADBE"
       onClick={[Function]}
       style={
         Object {
@@ -31,16 +41,13 @@ exports[`should match snapshot 1`] = `
     >
       <div
         className="action-card"
-        data-testid="action-card-id-1"
+        data-testid="action-card-id-ADBE"
         onClick={[Function]}
       >
         <h2
           className="action-card-title"
         >
-          Adobe
-           (
           ADBE
-          )
         </h2>
         <p
           className="action-card-company"
@@ -50,13 +57,13 @@ exports[`should match snapshot 1`] = `
         <p
           className="action-card-price"
         >
-          $
-          488
+          Score 
+          0.864
         </p>
       </div>
     </a>
     <a
-      href="/action_detail/2"
+      href="/action_detail/SPOT"
       onClick={[Function]}
       style={
         Object {
@@ -67,16 +74,13 @@ exports[`should match snapshot 1`] = `
     >
       <div
         className="action-card"
-        data-testid="action-card-id-2"
+        data-testid="action-card-id-SPOT"
         onClick={[Function]}
       >
         <h2
           className="action-card-title"
         >
-          Spotify Technology
-           (
           SPOT
-          )
         </h2>
         <p
           className="action-card-company"
@@ -86,13 +90,13 @@ exports[`should match snapshot 1`] = `
         <p
           className="action-card-price"
         >
-          $
-          229
+          Score 
+          0.875
         </p>
       </div>
     </a>
     <a
-      href="/action_detail/3"
+      href="/action_detail/BJ"
       onClick={[Function]}
       style={
         Object {
@@ -103,16 +107,13 @@ exports[`should match snapshot 1`] = `
     >
       <div
         className="action-card"
-        data-testid="action-card-id-3"
+        data-testid="action-card-id-BJ"
         onClick={[Function]}
       >
         <h2
           className="action-card-title"
         >
-          BJ's Wholesale Club
-           (
           BJ
-          )
         </h2>
         <p
           className="action-card-company"
@@ -122,13 +123,13 @@ exports[`should match snapshot 1`] = `
         <p
           className="action-card-price"
         >
-          $
-          45
+          Score 
+          0.756
         </p>
       </div>
     </a>
     <a
-      href="/action_detail/4"
+      href="/action_detail/GME"
       onClick={[Function]}
       style={
         Object {
@@ -139,16 +140,13 @@ exports[`should match snapshot 1`] = `
     >
       <div
         className="action-card"
-        data-testid="action-card-id-4"
+        data-testid="action-card-id-GME"
         onClick={[Function]}
       >
         <h2
           className="action-card-title"
         >
-          Gamestop
-           (
           GME
-          )
         </h2>
         <p
           className="action-card-company"
@@ -158,13 +156,13 @@ exports[`should match snapshot 1`] = `
         <p
           className="action-card-price"
         >
-          $
-          176
+          Score 
+          0.985
         </p>
       </div>
     </a>
     <a
-      href="/action_detail/5"
+      href="/action_detail/TSLA"
       onClick={[Function]}
       style={
         Object {
@@ -175,16 +173,13 @@ exports[`should match snapshot 1`] = `
     >
       <div
         className="action-card"
-        data-testid="action-card-id-5"
+        data-testid="action-card-id-TSLA"
         onClick={[Function]}
       >
         <h2
           className="action-card-title"
         >
-          Tesla
-           (
           TSLA
-          )
         </h2>
         <p
           className="action-card-company"
@@ -194,8 +189,8 @@ exports[`should match snapshot 1`] = `
         <p
           className="action-card-price"
         >
-          $
-          580
+          Score 
+          0.735
         </p>
       </div>
     </a>
