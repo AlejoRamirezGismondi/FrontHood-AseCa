@@ -26,6 +26,16 @@ exports[`Search setup should match snapshot 1`] = `
     />
   </div>
   <div
+    className="search-unknown"
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  >
+    Unable to find the action you were looking for
+  </div>
+  <div
     className="container"
     data-testid="search-container-id"
   >
@@ -194,16 +204,6 @@ exports[`Search setup should match snapshot 1`] = `
         </p>
       </div>
     </a>
-  </div>
-  <div
-    className="search-unknown"
-    style={
-      Object {
-        "visibility": "hidden",
-      }
-    }
-  >
-    Unable to find the action you were looking for
   </div>
 </div>
 `;

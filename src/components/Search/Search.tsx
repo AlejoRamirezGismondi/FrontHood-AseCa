@@ -4,7 +4,6 @@ import mock_actions from "./fake_action_data"
 import {Link} from "react-router-dom"
 import SearchBar from "./SearchBar";
 import {get} from "../http"
-import {BrowserRouter} from 'react-router-dom';
 
 class Search extends Component {
 
@@ -19,6 +18,7 @@ class Search extends Component {
         };
     }
     actionList;
+    searchUrl = "search/";
 
     state = {
         showMessage: false,
@@ -31,9 +31,16 @@ class Search extends Component {
     }
 
     handleSearch(){
-        this.fakeSearchStocks()
-        // @ts-ignore
         console.log(this.state.searchInput)
+        if(this.state.searchInput == ""){
+            this.setState({showMessage: true})
+        } else {
+            get(this.searchUrl + this.state.searchInput)
+                .then(res => {
+                    this.updateActions(res)
+                })
+        }
+
     }
 
     filterBySearchInput(input){
@@ -44,22 +51,9 @@ class Search extends Component {
         }
     }
 
-    searchStocks(){
-        // @ts-ignore
-        get(this.state.searchInput)
-            .then(res => {
-                this.updateActions(res)
-            })
-    }
-
-    fakeSearchStocks(){
-        console.log("Fake Search Stocks")
-        console.log(this.state.searchInput)
-        this.updateActions(mock_actions.actions_mock_search_api)
-    }
 
     showActions(){
-        this.actionList = this.state.actions.map((item) =>
+        return this.actionList = this.state.actions.map((item) =>
             <Link to={`/action_detail/${item["1. symbol"]}`}
                   style={{ color: 'inherit', textDecoration: 'none' }}
                   key={item["1. symbol"]}>
@@ -73,42 +67,17 @@ class Search extends Component {
         )
     }
 
-
-    /*
-    * Mock function, shows the actions filtered by the search bar input
-    * TODO swap with showActions
-    */
-    showFilteredActions(){
-        this.actionList = this.state.actions.filter(
-            item =>
-                item["symbol"].includes(this.state.searchInput) ||
-                item["company_name"].includes(this.state.searchInput) ||
-                item["action_name"].includes(this.state.searchInput)
-        ).map((item) =>
-            <Link to={`/action_detail/${item["id"]}`} style={{ color: 'inherit', textDecoration: 'none' }} key={item["id"]}>
-                <div className="action-card" data-testid={"action-card-id-"+item["id"]} key={item["id"]} onClick={() => this.viewDetails(item["id"])}>
-                    <h2 className="action-card-title">{item["action_name"]} ({item["symbol"]})</h2>
-                    <p className="action-card-company">{item["company_name"]}</p>
-                    <p className="action-card-price">${item["price"]}</p>
-                </div>
-            </Link>
-        )
-    }
-
     updateActions(data){
         this.setState({ actions: data.bestMatches })
-
-    }
-
-    showActionList() {
-
         if(this.state.actions.length > 0){
-            this.state.showMessage = false
-            this.showActions()
+            if(this.state.showMessage === true){
+                this.setState({showMessage: false})
+            }
         } else {
-            this.state.showMessage = true
+            if(this.state.showMessage === false){
+                this.setState({showMessage: true})
+            }
         }
-        return this.actionList
     }
 
     render() {
@@ -116,12 +85,12 @@ class Search extends Component {
             <div>
                 <SearchBar handleSearch={input => this.filterBySearchInput(input)}
                            handleSubmit={() => this.handleSearch()}/>
-                <div className="container" data-testid={"search-container-id"}>
-                    {this.showActionList()}
-                </div>
                 <div className="search-unknown"
                      style={{visibility: this.state.showMessage ? 'visible' : 'hidden' }} >
                     Unable to find the action you were looking for
+                </div>
+                <div className="container" data-testid={"search-container-id"}>
+                    {this.showActions()}
                 </div>
             </div>
         )
