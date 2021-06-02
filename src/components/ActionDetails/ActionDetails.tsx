@@ -19,7 +19,7 @@ import {Receipt} from "../Models/Receipt";
 import ReceiptView from "../Exchange/ReceiptView";
 import {get, put} from "../http";
 import {StockDetails} from "../Models/StockDetails";
-import {useToasts} from 'react-toast-notifications';
+import {ToastProvider, useToasts} from 'react-toast-notifications';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ActionDetails = () => {
   const classes = useStyles();
-  const { addToast } = useToasts();
   const history = useHistory();
   const [details, setDetails] = useState({ name: 'juan', price: '1', dailyPrices: { day: 'hoy', price: '2'}});
   const [input, setInput] = useState<string>();
@@ -97,7 +96,6 @@ const ActionDetails = () => {
         setOpenReceiptView(true);
       }).catch(err => {
         console.log(err)
-        addToast("Not enough funds!", { appearance: 'error' });
         history.push("/deposit")
       })
     }

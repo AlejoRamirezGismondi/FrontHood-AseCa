@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 import Router from './components/Router/Router';
-import {ToastProvider} from "react-toast-notifications";
 
 const theme = createMuiTheme({
   palette: {
@@ -36,11 +35,9 @@ const theme = createMuiTheme({
 function App() {
   return (
     <div className="App">
-      <ToastProvider>
-        <MuiThemeProvider theme={theme}>
-          <Router/>
-        </MuiThemeProvider>
-      </ToastProvider>
+      <MuiThemeProvider theme={theme}>
+        <Router/>
+      </MuiThemeProvider>
     </div>
   );
 }
