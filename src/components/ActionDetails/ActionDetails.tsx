@@ -19,7 +19,6 @@ import {Receipt} from "../Models/Receipt";
 import ReceiptView from "../Exchange/ReceiptView";
 import {get, put} from "../http";
 import {StockDetails} from "../Models/StockDetails";
-import {ToastProvider, useToasts} from 'react-toast-notifications';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,9 +48,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     background: "lightgray"
   },
-  buyButton: {
-
-  },
+  buyButton: {},
   fixedHeight: {
     height: 240,
   },
@@ -60,13 +57,27 @@ const useStyles = makeStyles((theme) => ({
 const ActionDetails = () => {
   const classes = useStyles();
   const history = useHistory();
-  const [details, setDetails] = useState({ name: 'juan', price: '1', dailyPrices: { day: 'hoy', price: '2'}});
-  const [input, setInput] = useState<string>();
+  const [details, setDetails] = useState<StockDetails>({
+    price: '1',
+    open: '1',
+    high: '1',
+    low: '2',
+    week52low: '2',
+    week52high: '2',
+    volume: '2',
+    volumeAverage: '2',
+    dailyPrices: [
+      {
+        day: 'hoy',
+        price: '2'
+      }
+    ]
+  });
   const [stock, setStock] = useState<Stock>({
     name: 'the Company X',
-    symbol:'AG8.FRK',
-    marketOpen:new Date(Date.now()),
-    marketClose:new Date(Date.now()),
+    symbol: 'AG8.FRK',
+    marketOpen: new Date(Date.now()),
+    marketClose: new Date(Date.now()),
     type: 'type',
     region: 'LA',
     timezone: 'UTC-3',
@@ -82,15 +93,15 @@ const ActionDetails = () => {
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [openReceiptView, setOpenReceiptView] = useState<boolean>(false)
-  const [receipt, setReceipt] = useState<Receipt>({id:0, userId: 0, stockBought:0, stockSymbol:'', price:0})
+  const [receipt, setReceipt] = useState<Receipt>({id: 0, userId: 0, stockBought: 0, stockSymbol: '', price: 0})
 
   const handleOpenDrawer = () => {
     setOpenDrawer(true)
   }
 
-  const handleBuy = (price: number, amount: number, didBuy:boolean) => {
+  const handleBuy = (price: number, amount: number, didBuy: boolean) => {
     setOpenDrawer(false)
-    if(didBuy) {
+    if (didBuy) {
       put('1/' + stock.symbol + '/' + amount, {}).then(() => {
         setReceipt({id: 2, userId: 1, price: price, stockBought: amount, stockSymbol: stock.symbol})
         setOpenReceiptView(true);
@@ -103,7 +114,7 @@ const ActionDetails = () => {
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  if (!details || !stock) return(<div> Loading Data... </div>);
+  if (!details || !stock) return (<div> Loading Data... </div>);
 
   return (
     <div className={classes.root}>
@@ -118,7 +129,8 @@ const ActionDetails = () => {
           >
             <ChevronLeftIcon/>
           </IconButton>
-          <Typography data-testid={"action-name-id"} component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+          <Typography data-testid={"action-name-id"} component="h1" variant="h6" color="inherit" noWrap
+                      className={classes.title}>
             Nombre de la accion: {stock.name}
           </Typography>
         </Toolbar>
@@ -129,7 +141,7 @@ const ActionDetails = () => {
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <Chart props={details.dailyPrices}/>
+                <Chart details={details}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
@@ -143,9 +155,10 @@ const ActionDetails = () => {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <h2>Detalles</h2>
-                <DetailTable data={details} />
+                <DetailTable data={details}/>
               </Paper>
             </Grid>
+            {/* TODO Esto nos tenemos que acordar de eliminarlo!! Hay que preguntar antes porque esta en nuestra primer entrega*/}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <h2>Calificaciones de Analistas</h2>
