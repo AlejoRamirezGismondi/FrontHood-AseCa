@@ -110,7 +110,7 @@ class Search extends Component {
     }
 
     componentDidMount() {
-        this.fetchData(this.searchUrl + 'tesco')
+        this.fetchData(this.searchUrl)
     }
 }
 
