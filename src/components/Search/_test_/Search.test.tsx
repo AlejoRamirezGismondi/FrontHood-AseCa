@@ -73,14 +73,14 @@ describe('input value change', () =>{
 describe('action cards in Search behaviour', () =>{
     it('should console log something action card is clicked', function () {
         const consoleSpy = jest.spyOn(console, 'log');
-        const action_card = getByTestId(root,"action-card-id-ADBE")
+        const action_card = getByTestId(root,"action-card-id-TESO")
         fireEvent.click(action_card);
-        expect(consoleSpy).toHaveBeenCalledWith("ADBE");
+        expect(consoleSpy).toHaveBeenCalledWith("TESO");
     });
 
     it('action card should have Name, Code, Company and Score', () => {
         // @ts-ignore
-        const actionCard = getByTestId(root,"action-card-id-ADBE");
+        const actionCard = getByTestId(root,"action-card-id-TESO");
         const title = actionCard.children.item(0).textContent
         const company = actionCard.children.item(1).textContent
         const score = actionCard.children.item(2).textContent
@@ -92,10 +92,10 @@ describe('action cards in Search behaviour', () =>{
     });
 
     it('should redirect to specific Action when action-card is clicked', () => {
-        const redirectUrl = '/action_detail/ADBE'
-        const action_card = getByTestId(root, "action-card-id-ADBE")
+        const redirectUrl = '/action_detail/TESO'
+        const action_card = getByTestId(root, "action-card-id-TESO")
         fireEvent.click(action_card);
-        expect(window.location.href).toBe('http://localhost/action_detail/ADBE')
+        expect(window.location.href).toBe('http://localhost/action_detail/TESO')
     })
 })
 

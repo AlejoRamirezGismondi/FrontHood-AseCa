@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import "./Search.css";
-import mock_actions from "./fake_action_data"
 import {Link} from "react-router-dom"
 import SearchBar from "./SearchBar";
 import {get} from "../http"
@@ -8,37 +7,51 @@ import {get} from "../http"
 class Search extends Component {
 
 
+    state = {
+        showErrorMessage: false,
+        errorMessage: "",
+        searchInput: "",
+        actions: []
+    };
+    actionList;
+    searchUrl = "search/";
+
     constructor(props) {
         super(props);
 
         this.state = {
-            showMessage: false,
+            showErrorMessage: false,
+            errorMessage: "",
             searchInput: "",
-            actions: mock_actions.actions_mock
+            actions: []
         };
     }
-    actionList;
-    searchUrl = "search/";
 
-    state = {
-        showMessage: false,
-        searchInput: "",
-        actions: mock_actions.actions_mock
-    };
+
+
 
     viewDetails(id) {
         console.log(id)
     }
 
+    fetchData(keyword){
+        get(keyword)
+            .then(res => {
+                this.updateActions(res)
+            })
+            .catch(error => {
+                this.setState({showErrorMessage: true, errorMessage: "Error RobinCopy not working"})
+                console.log(error)
+            })
+    }
+
     handleSearch(){
         console.log(this.state.searchInput)
+
         if(this.state.searchInput == ""){
-            this.setState({showMessage: true})
+            this.setState({showErrorMessage: true, errorMessage: "Unable to find the action you were looking for"})
         } else {
-            get(this.searchUrl + this.state.searchInput)
-                .then(res => {
-                    this.updateActions(res)
-                })
+            this.fetchData(this.searchUrl + this.state.searchInput)
         }
 
     }
@@ -70,12 +83,12 @@ class Search extends Component {
     updateActions(data){
         this.setState({ actions: data.bestMatches })
         if(this.state.actions.length > 0){
-            if(this.state.showMessage === true){
-                this.setState({showMessage: false})
+            if(this.state.showErrorMessage === true){
+                this.setState({showErrorMessage: false, errorMessage: "Unable to find the action you were looking for"})
             }
         } else {
-            if(this.state.showMessage === false){
-                this.setState({showMessage: true})
+            if(this.state.showErrorMessage === false){
+                this.setState({showErrorMessage: true, errorMessage: "Unable to find the action you were looking for"})
             }
         }
     }
@@ -86,14 +99,18 @@ class Search extends Component {
                 <SearchBar handleSearch={input => this.filterBySearchInput(input)}
                            handleSubmit={() => this.handleSearch()}/>
                 <div className="search-unknown"
-                     style={{visibility: this.state.showMessage ? 'visible' : 'hidden' }} >
-                    Unable to find the action you were looking for
+                     style={{visibility: this.state.showErrorMessage ? 'visible' : 'hidden' }} >
+                    {this.state.errorMessage}
                 </div>
                 <div className="container" data-testid={"search-container-id"}>
                     {this.showActions()}
                 </div>
             </div>
         )
+    }
+
+    componentDidMount() {
+        this.fetchData(this.searchUrl + 'tesco')
     }
 }
 
