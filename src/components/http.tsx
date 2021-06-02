@@ -7,7 +7,10 @@ type Config = {
 
 const request = (url: string, method: string, body: Object | null, config: Config) => {
 
-    let headers = {"Content-Type": "application/json"};
+    let headers = {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+    };
     const configuration: Object = {
         method: method,
         body: body ? JSON.stringify(body) : undefined,
