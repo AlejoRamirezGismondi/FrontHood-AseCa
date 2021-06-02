@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import Chart from "../Chart/Chart";
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
@@ -18,6 +19,7 @@ import {Receipt} from "../Models/Receipt";
 import ReceiptView from "../Exchange/ReceiptView";
 import {get, put} from "../http";
 import {StockDetails} from "../Models/StockDetails";
+import {ToastProvider, useToasts} from 'react-toast-notifications';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,6 +59,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ActionDetails = () => {
   const classes = useStyles();
+  const history = useHistory();
   const [details, setDetails] = useState({ name: 'juan', price: '1', dailyPrices: { day: 'hoy', price: '2'}});
   const [input, setInput] = useState<string>();
   const [stock, setStock] = useState<Stock>({
@@ -91,7 +94,10 @@ const ActionDetails = () => {
       put('1/' + stock.symbol + '/' + amount, {}).then(() => {
         setReceipt({id: 2, userId: 1, price: price, stockBought: amount, stockSymbol: stock.symbol})
         setOpenReceiptView(true);
-      }).catch(err => console.log(err))
+      }).catch(err => {
+        console.log(err)
+        history.push("/deposit")
+      })
     }
   }
 

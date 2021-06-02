@@ -1,5 +1,6 @@
 import {cleanup, fireEvent, render} from "@testing-library/react";
 import StockExchange from "../StockExchange";
+import {get, put} from "../../http";
 
 // https://jestjs.io/docs/asynchronous#:~:text=Promises,the%20test%20will%20automatically%20fail.
 // /\ para testear promises /\
@@ -33,6 +34,26 @@ describe('test stockExchange', () => {
     fireEvent.change(input, { target: { value: '23' } })
     expect(input.value).toBe('23')
   })
+
+  // integration tests
+  it('should make a get request', async () => {
+    await get('AG8.FRK')
+      .then(res => {
+        expect(res).toBeDefined();
+        expect(res["Global Quote"]).toBeDefined();
+      })
+  });
+
+  it('should make a put request', async () => {
+    await put('1/AG8.FRK/10', {}).then(res => {
+      expect(res).toBeDefined();
+    })
+  });
+
+
+
+
+
 
 
 });
