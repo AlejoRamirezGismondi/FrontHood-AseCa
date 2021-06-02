@@ -14,7 +14,7 @@ class Search extends Component {
         actions: []
     };
     actionList;
-    searchUrl = "search/";
+    searchUrl = "list?keyword=";
 
     constructor(props) {
         super(props);
@@ -67,21 +67,21 @@ class Search extends Component {
 
     showActions(){
         return this.actionList = this.state.actions.map((item) =>
-            <Link to={`/action_detail/${item["1. symbol"]}`}
+            <Link to={`/action_detail/${item.symbol}`}
                   style={{ color: 'inherit', textDecoration: 'none' }}
-                  key={item["1. symbol"]}>
-                <div className="action-card" data-testid={"action-card-id-"+item["1. symbol"]} key={item["1. symbol"]}
-                     onClick={() => this.viewDetails(item["1. symbol"])}>
-                    <h2 className="action-card-title">{item["1. symbol"]}</h2>
-                    <p className="action-card-company">{item["2. name"]}</p>
-                    <p className="action-card-price">Score {item["9. matchScore"]}</p>
+                  key={item.symbol}>
+                <div className="action-card" data-testid={"action-card-id-"+item.symbol} key={item.symbol}
+                     onClick={() => this.viewDetails(item.symbol)}>
+                    <h2 className="action-card-title">{item.symbol}</h2>
+                    <p className="action-card-company">{item.name}</p>
+                    {/*<p className="action-card-price">Type {item.type}</p>*/}
                 </div>
             </Link>
         )
     }
 
     updateActions(data){
-        this.setState({ actions: data.bestMatches })
+        this.setState({ actions: data })
         if(this.state.actions.length > 0){
             if(this.state.showErrorMessage === true){
                 this.setState({showErrorMessage: false, errorMessage: "Unable to find the action you were looking for"})
