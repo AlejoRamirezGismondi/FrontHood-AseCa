@@ -1,65 +1,116 @@
 import React, {Component} from "react";
 import "./Search.css";
-import actions from "./action_data"
 import {Link} from "react-router-dom"
-import Child from "./SearchBar";
+import SearchBar from "./SearchBar";
+import {get} from "../http"
 
 class Search extends Component {
 
-    actionList;
+
     state = {
-        showMessage: false,
-        searchInput: ""
+        showErrorMessage: false,
+        errorMessage: "",
+        searchInput: "",
+        actions: []
     };
+    actionList;
+    searchUrl = "search/";
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showErrorMessage: false,
+            errorMessage: "",
+            searchInput: "",
+            actions: []
+        };
+    }
+
+
+
 
     viewDetails(id) {
         console.log(id)
     }
 
+    fetchData(keyword){
+        get(keyword)
+            .then(res => {
+                this.updateActions(res)
+            })
+            .catch(error => {
+                this.setState({showErrorMessage: true, errorMessage: "Error RobinCopy not working"})
+                console.log(error)
+            })
+    }
+
+    handleSearch(){
+        console.log(this.state.searchInput)
+
+        if(this.state.searchInput == ""){
+            this.setState({showErrorMessage: true, errorMessage: "Unable to find the action you were looking for"})
+        } else {
+            this.fetchData(this.searchUrl + this.state.searchInput)
+        }
+
+    }
+
     filterBySearchInput(input){
-        if(input.length > 1 && input.length < 30){
+        if(input.length > 1 && input.length <= 30){
             this.setState({ searchInput: input });
         } else {
             this.setState({ searchInput: "" });
         }
     }
 
-    showActionList() {
-        if(actions.length > 0){
-            this.state.showMessage = false
-            this.actionList = actions.filter(
-                item =>
-                    item.symbol.includes(this.state.searchInput) ||
-                    item.company_name.includes(this.state.searchInput) ||
-                    item.action_name.includes(this.state.searchInput)
-            ).map((item) =>
-                <Link to={`/action_detail/${item.id}`} style={{ color: 'inherit', textDecoration: 'none' }} key={item.id}>
-                    <div className="action-card" data-testid={"action-card-id-"+item.id} key={item.id} onClick={() => this.viewDetails(item.id)}>
-                        <h2 className="action-card-title">{item.action_name} ({item.symbol})</h2>
-                        <p className="action-card-company">{item.company_name}</p>
-                        <p className="action-card-price">${item.price}</p>
-                    </div>
-                </Link>
-            )
+
+    showActions(){
+        return this.actionList = this.state.actions.map((item) =>
+            <Link to={`/action_detail/${item["1. symbol"]}`}
+                  style={{ color: 'inherit', textDecoration: 'none' }}
+                  key={item["1. symbol"]}>
+                <div className="action-card" data-testid={"action-card-id-"+item["1. symbol"]} key={item["1. symbol"]}
+                     onClick={() => this.viewDetails(item["1. symbol"])}>
+                    <h2 className="action-card-title">{item["1. symbol"]}</h2>
+                    <p className="action-card-company">{item["2. name"]}</p>
+                    <p className="action-card-price">Score {item["9. matchScore"]}</p>
+                </div>
+            </Link>
+        )
+    }
+
+    updateActions(data){
+        this.setState({ actions: data.bestMatches })
+        if(this.state.actions.length > 0){
+            if(this.state.showErrorMessage === true){
+                this.setState({showErrorMessage: false, errorMessage: "Unable to find the action you were looking for"})
+            }
         } else {
-            this.state.showMessage = true
+            if(this.state.showErrorMessage === false){
+                this.setState({showErrorMessage: true, errorMessage: "Unable to find the action you were looking for"})
+            }
         }
-        return this.actionList
     }
 
     render() {
         return (
             <div>
-                <Child handleSearch={input => this.filterBySearchInput(input)}/>
-                <div className="container" data-testid={"search-container-id"}>
-                    {this.showActionList()}
-                </div>
+                <SearchBar handleSearch={input => this.filterBySearchInput(input)}
+                           handleSubmit={() => this.handleSearch()}/>
                 <div className="search-unknown"
-                     style={{visibility: this.state.showMessage ? 'visible' : 'hidden' }} >
-                    Unable to find the action you were looking for
+                     style={{visibility: this.state.showErrorMessage ? 'visible' : 'hidden' }} >
+                    {this.state.errorMessage}
+                </div>
+                <div className="container" data-testid={"search-container-id"}>
+                    {this.showActions()}
                 </div>
             </div>
         )
+    }
+
+    componentDidMount() {
+        this.fetchData(this.searchUrl + 'tesco')
     }
 }
 

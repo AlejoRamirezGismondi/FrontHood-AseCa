@@ -35,7 +35,7 @@ const StyledTableRow = withStyles((theme: Theme) =>
   }),
 )(TableRow);
 
-const DetailTable = () => {
+const DetailTable = (props) => {
   const classes = useStyles();
 
   return (
@@ -43,11 +43,14 @@ const DetailTable = () => {
       <Table className={classes.table} size="small" aria-label="a dense table" color={"black"}>
         <TableHead>
           <StyledTableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <TableCell>Price</TableCell>
+            <TableCell align="right">Open</TableCell>
+            <TableCell align="right">High</TableCell>
+            <TableCell align="right">Low</TableCell>
+            <TableCell align="right">52 Week Low</TableCell>
+            <TableCell align="right">52 Week High</TableCell>
+            <TableCell align="right">Volume</TableCell>
+            <TableCell align="right">Volume Average</TableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
