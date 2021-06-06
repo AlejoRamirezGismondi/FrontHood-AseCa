@@ -52,6 +52,18 @@ const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 240,
   },
+  errDiv: {
+    display: "flex",
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: "center",
+    marginTop: '25%'
+  },
+  errText: {
+    marginTop: '50%',
+    marginLeft: 'auto'
+  }
 }));
 
 const ActionDetails = () => {
@@ -87,7 +99,6 @@ const ActionDetails = () => {
   useEffect(() => {
     get("stats/" + stock.symbol).then(response => {
       setDetails(response.data);
-      console.log(response.data);
     });
   }, [details, stock.symbol]);
 
@@ -114,7 +125,30 @@ const ActionDetails = () => {
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  if (!details || !stock) return (<div> Loading Data... </div>);
+  if (!details || !stock) return (
+    <div className={classes.root}>
+      <CssBaseline/>
+      <AppBar position="absolute" className={classes.appbar}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            href={"/"}
+            data-testid={"return-button-id"}
+          >
+            <ChevronLeftIcon/>
+          </IconButton>
+          <Typography data-testid={"action-name-id"} component="h1" variant="h6" color="inherit" noWrap
+                      className={classes.title}>
+            RobinCopy
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <div className={classes.errDiv}>
+        <Typography> Sorry, the information requested could not be retrieved. Please try again later </Typography>
+      </div>
+    </div>
+  );
 
   return (
     <div className={classes.root}>
@@ -158,7 +192,6 @@ const ActionDetails = () => {
                 <DetailTable details={details} stock={stock}/>
               </Paper>
             </Grid>
-            {/* TODO Esto nos tenemos que acordar de eliminarlo!! Hay que preguntar antes porque esta en nuestra primer entrega*/}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <h2>Calificaciones de Analistas</h2>
