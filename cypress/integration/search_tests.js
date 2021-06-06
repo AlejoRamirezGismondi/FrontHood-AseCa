@@ -3,18 +3,18 @@ describe('Search tests', () => {
         cy.visit('http://localhost:3000')
         cy.get("#test-div")
         cy.get('#action-search')
-            .type("ABC")
-            .should("have.value", "ABC");
+            .type("apple")
+            .should("have.value", "apple");
         cy.get('#search-button').click()
-        cy.contains('ABC').should("exist")
+        cy.contains('APLE').should("exist")
     })
 
     it('Search non existing stock', () => {
         cy.visit('http://localhost:3000')
         cy.get("#test-div")
         cy.get('#action-search')
-            .type("QWER(T)Y")
-            .should("have.value", "QWER(T)Y");
+            .type("lalala")
+            .should("have.value", "lalala");
         cy.get('#search-button').click()
         cy.contains('Unable to find the action you were looking for').should("exist")
     })
