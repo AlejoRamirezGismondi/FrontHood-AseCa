@@ -19,6 +19,7 @@ import {Receipt} from "../Models/Receipt";
 import ReceiptView from "../Exchange/ReceiptView";
 import {get, put} from "../http";
 import {StockDetails} from "../Models/StockDetails";
+import ReviewTable from "../ReviewTable/ReviewTable";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -95,10 +96,14 @@ const ActionDetails = () => {
     timezone: 'UTC-3',
     currency: 'USD',
   });
+  const [reviews, setReviews] = useState({ buy: '1', sell: '2', hold: '3' });
 
   useEffect(() => {
     get("stats/" + stock.symbol).then(response => {
       setDetails(response);
+    });
+    get("qualifications").then(response => {
+      setReviews(response);
     });
   }, [stock.symbol]);
 
@@ -195,6 +200,7 @@ const ActionDetails = () => {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <h2>Calificaciones de Analistas</h2>
+                <ReviewTable details={reviews} stock={stock}/>
               </Paper>
             </Grid>
           </Grid>
