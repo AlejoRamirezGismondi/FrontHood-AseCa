@@ -77,7 +77,7 @@ const ActionDetails = () => {
     get("stats/" + stock.symbol).then(response => {
       setDetails(response.data);
       console.log(response.data);
-    });
+    }).catch(err => console.log(err));
   }, [details, stock.symbol]);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
@@ -135,7 +135,7 @@ const ActionDetails = () => {
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <h2 data-testid={"actual-price-id"}>Precio Actual: {details.price}</h2>
-                <Button variant="contained" color="primary" onClick={handleOpenDrawer}>
+                <Button data-testid={"buying-button"} variant="contained" color="primary" onClick={handleOpenDrawer}>
                   Comprar
                 </Button>
               </Paper>
