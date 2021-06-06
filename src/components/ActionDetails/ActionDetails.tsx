@@ -98,9 +98,9 @@ const ActionDetails = () => {
 
   useEffect(() => {
     get("stats/" + stock.symbol).then(response => {
-      setDetails(response.data);
+      setDetails(response);
     });
-  }, [details, stock.symbol]);
+  }, [stock.symbol]);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [openReceiptView, setOpenReceiptView] = useState<boolean>(false)
