@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {createStyles, withStyles} from "@material-ui/core";
-import {StockDetails} from "../Models/StockDetails";
 import {Stock} from "../Models/Stock";
 
 const useStyles = makeStyles({

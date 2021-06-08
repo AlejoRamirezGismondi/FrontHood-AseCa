@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import Chart from "../Chart/Chart";
 import clsx from 'clsx';
 import {makeStyles} from '@material-ui/core/styles';
@@ -70,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
 const ActionDetails = () => {
   const classes = useStyles();
   const history = useHistory();
+  const { symbol } = useParams();
   const [details, setDetails] = useState<StockDetails>({
     price: '1',
     open: '1',
@@ -86,6 +88,7 @@ const ActionDetails = () => {
       }
     ]
   });
+
   const [stock, setStock] = useState<Stock>({
     name: 'the Company X',
     symbol: 'AG8.FRK',
@@ -96,6 +99,7 @@ const ActionDetails = () => {
     timezone: 'UTC-3',
     currency: 'USD',
   });
+
   const [reviews, setReviews] = useState({ buy: '1', sell: '2', hold: '3' });
 
   useEffect(() => {
