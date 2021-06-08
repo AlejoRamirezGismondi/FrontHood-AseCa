@@ -3,10 +3,10 @@ describe('Search tests', () => {
         cy.visit('http://localhost:3000')
         cy.get("#test-div")
         cy.get('#action-search')
-            .type("apple")
-            .should("have.value", "apple");
+            .type("A")
+            .should("have.value", "A");
         cy.get('#search-button').click()
-        cy.contains('APLE').should("exist")
+        cy.contains('A').should("exist")
     })
 
     it('Search non existing stock', () => {
