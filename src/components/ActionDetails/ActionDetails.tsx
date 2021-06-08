@@ -14,7 +14,6 @@ import Paper from '@material-ui/core/Paper';
 import {Button, IconButton} from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import DetailTable from "../DetailTable/DetailTable";
-import {Stock} from "../Models/Stock";
 import StockExchange from "../Exchange/StockExchange";
 import {Receipt} from "../Models/Receipt";
 import ReceiptView from "../Exchange/ReceiptView";
@@ -72,6 +71,7 @@ const ActionDetails = () => {
   const classes = useStyles();
   const history = useHistory();
   const { symbol } = useParams();
+  const { name } = useParams();
   const [details, setDetails] = useState<StockDetails>({
     price: '1',
     open: '1',
@@ -89,27 +89,16 @@ const ActionDetails = () => {
     ]
   });
 
-  const [stock, setStock] = useState<Stock>({
-    name: 'the Company X',
-    symbol: 'AG8.FRK',
-    marketOpen: new Date(Date.now()),
-    marketClose: new Date(Date.now()),
-    type: 'type',
-    region: 'LA',
-    timezone: 'UTC-3',
-    currency: 'USD',
-  });
-
   const [reviews, setReviews] = useState({ buy: '1', sell: '2', hold: '3' });
 
   useEffect(() => {
-    get("stats/" + stock.symbol).then(response => {
+    get("stats/" + symbol).then(response => {
       setDetails(response);
     });
     get("qualifications").then(response => {
       setReviews(response);
     });
-  }, [stock.symbol]);
+  }, [symbol]);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [openReceiptView, setOpenReceiptView] = useState<boolean>(false)
@@ -122,8 +111,8 @@ const ActionDetails = () => {
   const handleBuy = (price: number, amount: number, didBuy: boolean) => {
     setOpenDrawer(false)
     if (didBuy) {
-      put('1/' + stock.symbol + '/' + amount, {}).then(() => {
-        setReceipt({id: 2, userId: 1, price: price, stockBought: amount, stockSymbol: stock.symbol})
+      put('1/' + symbol + '/' + amount, {}).then(() => {
+        setReceipt({id: 2, userId: 1, price: price, stockBought: amount, stockSymbol: symbol})
         setOpenReceiptView(true);
       }).catch(err => {
         console.log(err)
@@ -134,7 +123,7 @@ const ActionDetails = () => {
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  if (!details || !stock) return (
+  if (!details) return (
     <div className={classes.root}>
       <CssBaseline/>
       <AppBar position="absolute" className={classes.appbar}>
@@ -174,7 +163,7 @@ const ActionDetails = () => {
           </IconButton>
           <Typography data-testid={"action-name-id"} component="h1" variant="h6" color="inherit" noWrap
                       className={classes.title}>
-            Nombre de la accion: {stock.name}
+            Nombre de la accion: {name}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -198,19 +187,19 @@ const ActionDetails = () => {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <h2>Detalles</h2>
-                <DetailTable details={details} stock={stock}/>
+                <DetailTable details={details} name={name}/>
               </Paper>
             </Grid>
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <h2>Calificaciones de Analistas</h2>
-                <ReviewTable details={reviews} stock={stock}/>
+                <ReviewTable details={reviews} name={name}/>
               </Paper>
             </Grid>
           </Grid>
         </Container>
       </main>
-      <StockExchange stock={stock} open={openDrawer} onClose={handleBuy}/>
+      <StockExchange symbol={symbol} name={name} open={openDrawer} onClose={handleBuy}/>
       <ReceiptView receipt={receipt} open={openReceiptView} onClose={() => setOpenReceiptView(false)}/>
     </div>
   );

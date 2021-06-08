@@ -9,7 +9,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {createStyles, withStyles} from "@material-ui/core";
 import {StockDetails} from "../Models/StockDetails";
-import {Stock} from "../Models/Stock";
 
 const useStyles = makeStyles({
   table: {
@@ -27,7 +26,7 @@ const StyledTableRow = withStyles((theme: Theme) =>
 
 type Props = {
   details: StockDetails,
-  stock: Stock
+  name: string
 }
 
 const DetailTable = (props: Props) => {
@@ -49,9 +48,9 @@ const DetailTable = (props: Props) => {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          <StyledTableRow key={props.stock.name}>
+          <StyledTableRow key={props.name}>
             <TableCell component="th" scope="row">
-              {props.stock.name}
+              {props.name}
             </TableCell>
             <TableCell align="right">{props.details.open}</TableCell>
             <TableCell align="right">{props.details.high}</TableCell>

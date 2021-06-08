@@ -67,7 +67,7 @@ class Search extends Component {
 
     showActions(){
         return this.actionList = this.state.actions.map((item) =>
-            <Link to={`/action_detail/${item.symbol}`}
+            <Link to={`/action_detail/${item.name}/${item.symbol}`}
                   style={{ color: 'inherit', textDecoration: 'none' }}
                   key={item.symbol}>
                 <div className="action-card" data-testid={"action-card-id-"+item.symbol} key={item.symbol}
