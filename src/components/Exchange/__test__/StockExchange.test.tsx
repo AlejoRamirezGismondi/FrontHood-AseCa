@@ -6,7 +6,7 @@ import {get, put} from "../../http";
 // /\ para testear promises /\
 
 const stockExchange = <StockExchange onClose={()=>{}} open stock={{
-  symbol:'QQQ',
+  symbol:'AMC',
   name: 'NAME',
   type: 'type',
   region: 'LA',
@@ -24,7 +24,7 @@ describe('test stockExchange', () => {
 
   it('should contain stock symbol', () => {
     const { getByTestId } = render(stockExchange);
-    expect(getByTestId("stock-symbol-id")).toHaveTextContent('QQQ')
+    expect(getByTestId("stock-symbol-id")).toHaveTextContent('AMC')
   });
 
   it('test handle change works', () => {

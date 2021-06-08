@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {createStyles, withStyles} from "@material-ui/core";
-import {StockDetails} from "../Models/StockDetails";
 
 const useStyles = makeStyles({
   table: {
@@ -25,7 +24,7 @@ const StyledTableRow = withStyles((theme: Theme) =>
 )(TableRow);
 
 type Props = {
-  details: StockDetails,
+  details: any,
   name: string
 }
 
@@ -38,13 +37,9 @@ const DetailTable = (props: Props) => {
         <TableHead>
           <StyledTableRow>
             <TableCell>Price</TableCell>
-            <TableCell align="right">Open</TableCell>
-            <TableCell align="right">High</TableCell>
-            <TableCell align="right">Low</TableCell>
-            <TableCell align="right">52 Week Low</TableCell>
-            <TableCell align="right">52 Week High</TableCell>
-            <TableCell align="right">Volume</TableCell>
-            <TableCell align="right">Volume Average</TableCell>
+            <TableCell align="right">Buy</TableCell>
+            <TableCell align="right">Sell</TableCell>
+            <TableCell align="right">Hold</TableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
@@ -52,13 +47,9 @@ const DetailTable = (props: Props) => {
             <TableCell component="th" scope="row">
               {props.name}
             </TableCell>
-            <TableCell align="right">{props.details.open}</TableCell>
-            <TableCell align="right">{props.details.high}</TableCell>
-            <TableCell align="right">{props.details.low}</TableCell>
-            <TableCell align="right">{props.details.week52low}</TableCell>
-            <TableCell align="right">{props.details.week52high}</TableCell>
-            <TableCell align="right">{props.details.volume}</TableCell>
-            <TableCell align="right">{props.details.volumeAverage}</TableCell>
+            <TableCell align="right">{props.details.buy}</TableCell>
+            <TableCell align="right">{props.details.sell}</TableCell>
+            <TableCell align="right">{props.details.hold}</TableCell>
           </StyledTableRow>
         </TableBody>
       </Table>

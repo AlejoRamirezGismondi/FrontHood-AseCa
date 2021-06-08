@@ -52,7 +52,7 @@ const TestExample = () => {
         <button type={"submit"} data-testid={"detail-submit-button-id"}>submit</button>
       </form>
       <button onClick={handleOpenDrawer}> buy</button>
-      <StockExchange stock={stock} open={openDrawer} onClose={handleBuy}/>
+      {/*<StockExchange stock={stock} open={openDrawer} onClose={handleBuy}/>*/}
     </div>
   );
 }
