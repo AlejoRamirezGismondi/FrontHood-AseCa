@@ -95,11 +95,11 @@ describe('action cards in Search behaviour', () =>{
             const actionCard = getByTestId(root,"action-card-id-TESO");
             const title = actionCard.children.item(0).textContent
             const company = actionCard.children.item(1).textContent
-            const score = actionCard.children.item(2).textContent
+            /*const score = actionCard.children.item(2).textContent*/
 
             expect(title).not.toBeUndefined()
             expect(company).not.toBeUndefined()
-            expect(score).not.toBeUndefined()
+            /*expect(score).not.toBeUndefined()*/
         })
 
 

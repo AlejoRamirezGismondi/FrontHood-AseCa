@@ -1,16 +1,16 @@
 export type StockDetails = {
-  price: number,
-  open: number,
-  high: number,
-  low: number,
-  week52low: number,
-  week52high: number,
-  volume: number,
-  volumeaverage: number,
+  price: string,
+  open: string,
+  high: string,
+  low: string,
+  week52low: string,
+  week52high: string,
+  volume: string,
+  volumeAverage: string,
   dailyPrices: Price[],
 }
 
 export type Price = {
-  date: string,
-  value: string
+  day: string,
+  price: string
 }
