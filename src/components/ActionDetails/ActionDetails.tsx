@@ -51,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
   },
   buyButton: {},
   fixedHeight: {
-    height: 240,
   },
   errDiv: {
     display: "flex",
@@ -183,8 +182,7 @@ const ActionDetails = () => {
                   Comprar
                 </Button>
               </Paper>
-            </Grid>
-            <Grid item xs={12}>
+              <br></br>
               <Paper className={classes.paper}>
                 <h2>Detalles</h2>
                 <DetailTable details={details} name={name}/>

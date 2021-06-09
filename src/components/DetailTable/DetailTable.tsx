@@ -12,8 +12,10 @@ import {StockDetails} from "../Models/StockDetails";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
   },
+  cell: {
+    padding: '10px'
+  }
 });
 
 const StyledTableRow = withStyles((theme: Theme) =>
@@ -37,28 +39,38 @@ const DetailTable = (props: Props) => {
       <Table className={classes.table} size="small" aria-label="a dense table" color={"black"}>
         <TableHead>
           <StyledTableRow>
-            <TableCell>Price</TableCell>
-            <TableCell align="right">Open</TableCell>
-            <TableCell align="right">High</TableCell>
-            <TableCell align="right">Low</TableCell>
-            <TableCell align="right">52 Week Low</TableCell>
-            <TableCell align="right">52 Week High</TableCell>
-            <TableCell align="right">Volume</TableCell>
-            <TableCell align="right">Volume Average</TableCell>
+            <TableCell className={classes.cell}>Category</TableCell>
+            <TableCell className={classes.cell}>Price</TableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          <StyledTableRow key={props.name}>
-            <TableCell component="th" scope="row">
-              {props.name}
-            </TableCell>
-            <TableCell align="right">{props.details.open}</TableCell>
-            <TableCell align="right">{props.details.high}</TableCell>
-            <TableCell align="right">{props.details.low}</TableCell>
-            <TableCell align="right">{props.details.week52low}</TableCell>
-            <TableCell align="right">{props.details.week52high}</TableCell>
-            <TableCell align="right">{props.details.volume}</TableCell>
-            <TableCell align="right">{props.details.volumeAverage}</TableCell>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>Open</TableCell>
+            <TableCell className={classes.cell}>{props.details.open}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>High</TableCell>
+            <TableCell className={classes.cell}>{props.details.high}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>Low</TableCell>
+            <TableCell className={classes.cell}>{props.details.low}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>52 Week Low</TableCell>
+            <TableCell className={classes.cell}>{props.details.week52low}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>52 Week High</TableCell>
+            <TableCell className={classes.cell}>{props.details.week52high}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>Volume</TableCell>
+            <TableCell className={classes.cell}>{props.details.volume}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>Volume Average</TableCell>
+            <TableCell className={classes.cell}>{props.details.volumeAverage}</TableCell>
           </StyledTableRow>
         </TableBody>
       </Table>
