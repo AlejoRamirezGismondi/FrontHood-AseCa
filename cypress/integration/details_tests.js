@@ -32,11 +32,6 @@ describe('Details tests', () => {
 
     it('Validate stock history', () => {
         cy.visit('http://localhost:3000/action_detail/Armor%20Minerals%20Inc/A.TRV')
-        cy.get('[data-testid=canvas]').should('be.visible').find('g.dataset-0 line')
-    })
-
-    it('api error message', () => {
-        cy.visit('http://localhost:3000/action_detail/QWERTY')
-        //error message
+        cy.get('[data-testid=canvas]').should('be.visible')
     })
 })
