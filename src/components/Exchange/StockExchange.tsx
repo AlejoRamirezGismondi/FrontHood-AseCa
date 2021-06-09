@@ -68,7 +68,7 @@ const StockExchange = (props: Props) => {
             <p>Ingrese la cantidad que desee comprar: </p>
             <input data-testid={"stock-input-id"} type='text' placeholder={'amount'} value={amount}
                    onChange={handleChange}/>
-            <p data-testid={"total-to-buy-id"}>SubTotal: {amount * price}</p>
+            <p>SubTotal: {amount * price}</p>
             <Button variant="contained" color="primary" onClick={submitBuy}> Comprar </Button>
           </form>
         </div>
@@ -78,4 +78,3 @@ const StockExchange = (props: Props) => {
 }
 
 export default StockExchange;
-

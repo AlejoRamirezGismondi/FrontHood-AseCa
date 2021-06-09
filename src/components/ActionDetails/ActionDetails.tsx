@@ -51,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
   },
   buyButton: {},
   fixedHeight: {
-    height: 240,
   },
   errDiv: {
     display: "flex",
@@ -72,6 +71,7 @@ const ActionDetails = () => {
   const history = useHistory();
   const { symbol } = useParams();
   const { name } = useParams();
+  const [error, setError] = useState<boolean>(false);
   const [details, setDetails] = useState<StockDetails>({
     price: '1',
     open: '1',
@@ -92,11 +92,16 @@ const ActionDetails = () => {
   const [reviews, setReviews] = useState({ buy: '1', sell: '2', hold: '3' });
 
   useEffect(() => {
+    get(symbol).catch(() => setError(true))
     get("stats/" + symbol).then(response => {
       setDetails(response);
+    }).catch(err => {
+      console.log(err)
     });
     get("qualifications").then(response => {
       setReviews(response);
+    }).catch(err => {
+      console.log(err)
     });
   }, [symbol]);
 
@@ -149,58 +154,61 @@ const ActionDetails = () => {
   );
 
   return (
-    <div className={classes.root}>
-      <CssBaseline/>
-      <AppBar position="absolute" className={classes.appbar}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            href={"/"}
-            data-testid={"return-button-id"}
-          >
-            <ChevronLeftIcon/>
-          </IconButton>
-          <Typography data-testid={"action-name-id"} component="h1" variant="h6" color="inherit" noWrap
-                      className={classes.title}>
-            Nombre de la accion: {name}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer}/>
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart details={details}/>
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <h2 data-testid={"actual-price-id"}>Precio Actual: {details.price}</h2>
-                <Button variant="contained" color="primary" onClick={handleOpenDrawer}>
-                  Comprar
-                </Button>
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <h2>Detalles</h2>
-                <DetailTable details={details} name={name}/>
-              </Paper>
-            </Grid>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <h2>Calificaciones de Analistas</h2>
-                <ReviewTable details={reviews} name={name}/>
-              </Paper>
-            </Grid>
-          </Grid>
-        </Container>
-      </main>
-      <StockExchange symbol={symbol} name={name} open={openDrawer} onClose={handleBuy}/>
-      <ReceiptView receipt={receipt} open={openReceiptView} onClose={() => setOpenReceiptView(false)}/>
+    <div>
+      {error? <h1> Invalid Stock symbol</h1> :
+        <div className={classes.root}>
+          <CssBaseline/>
+          <AppBar position="absolute" className={classes.appbar}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                href={"/"}
+                data-testid={"return-button-id"}
+              >
+                <ChevronLeftIcon/>
+              </IconButton>
+              <Typography data-testid={"action-name-id"} component="h1" variant="h6" color="inherit" noWrap
+                          className={classes.title}>
+                Nombre de la accion: {name}
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <main className={classes.content}>
+            <div className={classes.appBarSpacer}/>
+            <Container maxWidth="lg" className={classes.container}>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={8} lg={9}>
+                  <Paper className={fixedHeightPaper}>
+                    <Chart details={details}/>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} md={4} lg={3}>
+                  <Paper className={fixedHeightPaper}>
+                    <h2 data-testid={"actual-price-id"}>Precio Actual: {details.price}</h2>
+                    <Button data-testid={"buying-button"} variant="contained" color="primary" onClick={handleOpenDrawer}>
+                      Comprar
+                    </Button>
+                  </Paper>
+                  <br></br>
+                  <Paper className={classes.paper}>
+                    <h2>Detalles</h2>
+                    <DetailTable details={details} name={name}/>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12}>
+                  <Paper className={classes.paper}>
+                    <h2>Calificaciones de Analistas</h2>
+                    <ReviewTable details={reviews} name={name}/>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </Container>
+          </main>
+          <StockExchange symbol={symbol} name={name} open={openDrawer} onClose={handleBuy}/>
+          <ReceiptView receipt={receipt} open={openReceiptView} onClose={() => setOpenReceiptView(false)}/>
+        </div>
+      }
     </div>
   );
 }

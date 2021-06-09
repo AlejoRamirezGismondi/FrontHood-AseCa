@@ -35,8 +35,11 @@ class Search extends Component {
     }
 
     fetchData(keyword){
+        console.log(keyword);
+        debugger
         get(keyword)
             .then(res => {
+                console.log(res)
                 this.updateActions(res)
             })
             .catch(error => {
@@ -47,8 +50,9 @@ class Search extends Component {
 
     handleSearch(){
         console.log(this.state.searchInput)
+        debugger
 
-        if(this.state.searchInput == ""){
+        if(this.state.searchInput === ""){
             this.setState({showErrorMessage: true, errorMessage: "Unable to find the action you were looking for"})
         } else {
             this.fetchData(this.searchUrl + this.state.searchInput)
@@ -57,7 +61,8 @@ class Search extends Component {
     }
 
     filterBySearchInput(input){
-        if(input.length > 1 && input.length <= 30){
+        if(input.length >= 1 && input.length <= 30){
+            debugger
             this.setState({ searchInput: input });
         } else {
             this.setState({ searchInput: "" });
@@ -110,7 +115,7 @@ class Search extends Component {
     }
 
     componentDidMount() {
-        this.fetchData(this.searchUrl + 'tesco')
+        this.fetchData(this.searchUrl)
     }
 }
 
