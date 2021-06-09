@@ -51,15 +51,5 @@ describe('test stockExchange', () => {
   });
 
 
-
-
-
-
-
 });
-
-
-
-
-
 

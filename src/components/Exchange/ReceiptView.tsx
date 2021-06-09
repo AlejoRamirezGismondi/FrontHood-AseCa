@@ -1,7 +1,6 @@
 import React from "react";
 import {Receipt} from "../Models/Receipt";
 import Drawer from 'react-drag-drawer';
-import PrintProvider from "react-easy-print";
 import './StockExchange.css';
 import {Button} from "@material-ui/core";
 

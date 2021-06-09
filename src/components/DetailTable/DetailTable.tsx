@@ -8,24 +8,15 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {createStyles, withStyles} from "@material-ui/core";
+import {StockDetails} from "../Models/StockDetails";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
   },
+  cell: {
+    padding: '10px'
+  }
 });
-
-function createData(name: string, calories: number, fat: number, carbs: number, protein: number) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
 
 const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
@@ -35,7 +26,12 @@ const StyledTableRow = withStyles((theme: Theme) =>
   }),
 )(TableRow);
 
-const DetailTable = (props) => {
+type Props = {
+  details: StockDetails,
+  name: string
+}
+
+const DetailTable = (props: Props) => {
   const classes = useStyles();
 
   return (
@@ -43,28 +39,39 @@ const DetailTable = (props) => {
       <Table className={classes.table} size="small" aria-label="a dense table" color={"black"}>
         <TableHead>
           <StyledTableRow>
-            <TableCell>Price</TableCell>
-            <TableCell align="right">Open</TableCell>
-            <TableCell align="right">High</TableCell>
-            <TableCell align="right">Low</TableCell>
-            <TableCell align="right">52 Week Low</TableCell>
-            <TableCell align="right">52 Week High</TableCell>
-            <TableCell align="right">Volume</TableCell>
-            <TableCell align="right">Volume Average</TableCell>
+            <TableCell className={classes.cell}>Category</TableCell>
+            <TableCell className={classes.cell}>Price</TableCell>
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </StyledTableRow>
-          ))}
+          <StyledTableRow>
+            <TableCell className={classes.cell}>Open</TableCell>
+            <TableCell className={classes.cell}>{props.details.open}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>High</TableCell>
+            <TableCell className={classes.cell}>{props.details.high}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>Low</TableCell>
+            <TableCell className={classes.cell}>{props.details.low}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>52 Week Low</TableCell>
+            <TableCell className={classes.cell}>{props.details.week52low}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>52 Week High</TableCell>
+            <TableCell className={classes.cell}>{props.details.week52high}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>Volume</TableCell>
+            <TableCell className={classes.cell}>{props.details.volume}</TableCell>
+          </StyledTableRow>
+          <StyledTableRow>
+            <TableCell className={classes.cell}>Volume Average</TableCell>
+            <TableCell className={classes.cell}>{props.details.volumeAverage}</TableCell>
+          </StyledTableRow>
         </TableBody>
       </Table>
     </TableContainer>

@@ -6,7 +6,7 @@ import SearchIcon from "@material-ui/icons/Search";
 function SearchBar(props) {
     return (
         <div className="component-search-input">
-            <div className="input-container">
+            <div className="input-container" id={'test-div'}>
                 <input
                     data-testid={"search-input-id"}
                     type="text"
@@ -20,6 +20,7 @@ function SearchBar(props) {
             <button
                 data-testid={"search-button-id"}
                 type="submit"
+                id={'search-button'}
                 onClick={() => props.handleSubmit()}
                 value="Search">
             </button>
