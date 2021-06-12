@@ -81,9 +81,9 @@ describe('action cards in Search behaviour', () =>{
         await waitFor(() => expect(container.childElementCount)
             .toBeGreaterThanOrEqual(1),{interval:100})
             .then( () => {
-            const action_card = getByTestId(root,"action-card-id-TESO")
+            const action_card = getByTestId(root,"action-card-id-A")
             fireEvent.click(action_card);
-            expect(consoleSpy).toHaveBeenCalledWith("TESO");
+            expect(consoleSpy).toHaveBeenCalledWith("A");
         })
     });
 
@@ -92,7 +92,7 @@ describe('action cards in Search behaviour', () =>{
         await waitFor(() => expect(container.childElementCount)
                 .toBeGreaterThanOrEqual(1), {interval:100})
             .then( () => {
-            const actionCard = getByTestId(root,"action-card-id-TESO");
+            const actionCard = getByTestId(root,"action-card-id-A");
             const title = actionCard.children.item(0).textContent
             const company = actionCard.children.item(1).textContent
             /*const score = actionCard.children.item(2).textContent*/
@@ -108,19 +108,17 @@ describe('action cards in Search behaviour', () =>{
 
     it('should redirect to specific Action when action-card is clicked', async () => {
         const container = getByTestId(root, "search-container-id")
-        const redirectUrl = '/action_detail/TESO'
+        const redirectUrl = '/action_detail/Agilent%20Technologies%20Inc/A'
 
         await waitFor(() => expect(container.childElementCount)
             .toBeGreaterThanOrEqual(1), {interval:100})
             .then( () => {
-                const action_card = getByTestId(root, "action-card-id-TESO")
+                const action_card = getByTestId(root, "action-card-id-A")
                 fireEvent.click(action_card);
-                expect(window.location.href).toBe('http://localhost/action_detail/TESO')
+                expect(window.location.href).toBe(`http://localhost${redirectUrl}`)
             })
     })
 })
-
-
 
 
 

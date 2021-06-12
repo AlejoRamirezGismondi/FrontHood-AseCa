@@ -5,13 +5,7 @@ import {get, put} from "../../http";
 // https://jestjs.io/docs/asynchronous#:~:text=Promises,the%20test%20will%20automatically%20fail.
 // /\ para testear promises /\
 
-const stockExchange = <StockExchange onClose={()=>{}} open stock={{
-  symbol:'AMC',
-  name: 'NAME',
-  type: 'type',
-  region: 'LA',
-  timezone: 'UTC-3',
-  currency: 'USD',}}/>
+const stockExchange = <StockExchange onClose={()=>{}} open  name={'NAME'} symbol={'AMC'}/>
 
 describe('test stockExchange', () => {
   afterEach(() => jest.resetAllMocks());

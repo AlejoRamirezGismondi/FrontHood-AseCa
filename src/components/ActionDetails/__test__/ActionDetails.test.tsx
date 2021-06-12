@@ -23,7 +23,7 @@ beforeAll(() => {
 });
 
 it('should contain name', function () {
-  expect(getByTestId(root, "action-name-id")).toHaveTextContent("Nombre de la accion");
+  expect(getByTestId(root, "action-name-id")).toHaveTextContent("Nombre de la accion:");
 });
 
 it('should contain its actual price', () => {
