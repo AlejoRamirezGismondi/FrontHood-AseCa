@@ -7,6 +7,7 @@ exports[`Search setup should match snapshot 1`] = `
   >
     <div
       className="input-container"
+      id="test-div"
     >
       <input
         data-testid="search-input-id"
@@ -20,48 +21,7 @@ exports[`Search setup should match snapshot 1`] = `
     </div>
     <button
       data-testid="search-button-id"
-      onClick={[Function]}
-      type="submit"
-      value="Search"
-    />
-  </div>
-  <div
-    className="search-unknown"
-    style={
-      Object {
-        "visibility": "hidden",
-      }
-    }
-  >
-    
-  </div>
-  <div
-    className="container"
-    data-testid="search-container-id"
-  />
-</div>
-`;
-
-exports[`should match snapshot 1`] = `
-<div>
-  <div
-    className="component-search-input"
-  >
-    <div
-      className="input-container"
-    >
-      <input
-        data-testid="search-input-id"
-        id="action-search"
-        maxLength={30}
-        minLength={2}
-        onChange={[Function]}
-        placeholder="Search Action"
-        type="text"
-      />
-    </div>
-    <button
-      data-testid="search-button-id"
+      id="search-button"
       onClick={[Function]}
       type="submit"
       value="Search"
