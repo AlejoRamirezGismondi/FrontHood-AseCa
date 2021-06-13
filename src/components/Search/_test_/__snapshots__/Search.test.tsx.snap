@@ -13,7 +13,7 @@ exports[`Search setup should match snapshot 1`] = `
         data-testid="search-input-id"
         id="action-search"
         maxLength={30}
-        minLength={2}
+        minLength={1}
         onChange={[Function]}
         placeholder="Search Action"
         type="text"
@@ -29,6 +29,7 @@ exports[`Search setup should match snapshot 1`] = `
   </div>
   <div
     className="search-unknown"
+    data-testid="search-unknown-id"
     style={
       Object {
         "visibility": "hidden",
