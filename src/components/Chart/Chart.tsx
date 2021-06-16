@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Line} from 'react-chartjs-2';
 import {Price, StockDetails} from "../Models/StockDetails";
 import {Button, ButtonGroup} from "@material-ui/core";
@@ -40,13 +40,13 @@ const Chart = (props: Props) => {
     return p.price;
   });
 
-  const labels1d = [labels[0]];
+  const labels1d = [labels[0], labels[0]];
   const labels1w = labels.slice(0, 7);
   const labels1m = labels.slice(0, 31);
   const labels3m = labels.slice(0, 99);
   const labels1y = labels.slice(0,364);
 
-  const prices1d = [prices[0]];
+  const prices1d = [prices[0], prices[0]];
   const prices1w = prices.slice(0, 7);
   const prices1m = prices.slice(0, 31);
   const prices3m = prices.slice(0, 99);
@@ -66,6 +66,21 @@ const Chart = (props: Props) => {
       ],
     }
   );
+
+  useEffect(()=> {
+    setData({
+      labels: labels1d,
+      datasets: [
+        {
+          label: 'Price',
+          data: prices1d,
+          fill: false,
+          backgroundColor: 'rgb(0, 200, 0)',
+          borderColor: 'rgba(0, 200, 0, 0.2)',
+        },
+      ],
+    });
+  }, [])
 
   return (
     <>
