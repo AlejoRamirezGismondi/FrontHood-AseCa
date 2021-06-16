@@ -13,7 +13,7 @@ function SearchBar(props) {
                     id="action-search"
                     placeholder="Search Action"
                     maxLength= {30}
-                    minLength= {2}
+                    minLength= {1}
                     onChange={event => props.handleSearch(event.target.value)}
                 />
             </div>
