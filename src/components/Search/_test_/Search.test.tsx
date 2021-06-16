@@ -70,9 +70,9 @@ describe('search', () =>{
         expect(consoleSpy).toHaveBeenCalledWith("ADBE");
     });
 
-    it('there should be actions related to input "AB"', async function () {
+    it('there should be actions related to input "ABCD"', async function () {
         const input = getByTestId(root,"search-input-id")
-        fireEvent.change(input, { target: { value: 'AB' } })
+        fireEvent.change(input, { target: { value: "ABCD" } })
         const button = getByTestId(root,"search-button-id")
         fireEvent.click(button);
         const container = getByTestId(root, "search-container-id")
