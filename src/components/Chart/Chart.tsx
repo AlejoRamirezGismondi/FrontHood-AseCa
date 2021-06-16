@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Line} from 'react-chartjs-2';
 import {Price, StockDetails} from "../Models/StockDetails";
 import {Button, ButtonGroup} from "@material-ui/core";
@@ -19,6 +19,17 @@ type Props = {
   details: StockDetails
 }
 
+type Data = {
+  labels: string[],
+  datasets: {
+    label: string,
+    data: string[],
+    fill: boolean,
+    backgroundColor: string,
+    borderColor: string
+  }[]
+}
+
 const Chart = (props: Props) => {
 
   const labels = props.details.dailyPrices.map(p => {
@@ -29,18 +40,32 @@ const Chart = (props: Props) => {
     return p.price;
   });
 
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: 'Price',
-        data: prices,
-        fill: false,
-        backgroundColor: 'rgb(0, 200, 0)',
-        borderColor: 'rgba(0, 200, 0, 0.2)',
-      },
-    ],
-  };
+  const labels1d = [labels[0]];
+  const labels1w = labels.slice(0, 7);
+  const labels1m = labels.slice(0, 31);
+  const labels3m = labels.slice(0, 99);
+  const labels1y = labels.slice(0,364);
+
+  const prices1d = [prices[0]];
+  const prices1w = prices.slice(0, 7);
+  const prices1m = prices.slice(0, 31);
+  const prices3m = prices.slice(0, 99);
+  const prices1y = prices.slice(0,364);
+
+  const [data, setData] = useState<Data>(
+    {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Price',
+          data: prices,
+          fill: false,
+          backgroundColor: 'rgb(0, 200, 0)',
+          borderColor: 'rgba(0, 200, 0, 0.2)',
+        },
+      ],
+    }
+  );
 
   return (
     <>
@@ -48,12 +73,76 @@ const Chart = (props: Props) => {
         <h1 className='title'>Line Chart</h1>
       </div>
       <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-        <Button>1D</Button>
-        <Button>1W</Button>
-        <Button>1M</Button>
-        <Button>3M</Button>
-        <Button>1Y</Button>
-        <Button>5Y</Button>
+        <Button onClick={() => {
+          setData({
+            labels: labels1d,
+            datasets: [
+              {
+                label: 'Price',
+                data: prices1d,
+                fill: false,
+                backgroundColor: 'rgb(0, 200, 0)',
+                borderColor: 'rgba(0, 200, 0, 0.2)',
+              },
+            ],
+          });
+        }}>1D</Button>
+        <Button onClick={() => {
+          setData({
+            labels: labels1w,
+            datasets: [
+              {
+                label: 'Price',
+                data: prices1w,
+                fill: false,
+                backgroundColor: 'rgb(0, 200, 0)',
+                borderColor: 'rgba(0, 200, 0, 0.2)',
+              },
+            ],
+          });
+        }}>1W</Button>
+        <Button onClick={() => {
+          setData({
+            labels: labels1m,
+            datasets: [
+              {
+                label: 'Price',
+                data: prices1m,
+                fill: false,
+                backgroundColor: 'rgb(0, 200, 0)',
+                borderColor: 'rgba(0, 200, 0, 0.2)',
+              },
+            ],
+          });
+        }}>1M</Button>
+        <Button onClick={() => {
+          setData({
+            labels: labels3m,
+            datasets: [
+              {
+                label: 'Price',
+                data: prices3m,
+                fill: false,
+                backgroundColor: 'rgb(0, 200, 0)',
+                borderColor: 'rgba(0, 200, 0, 0.2)',
+              },
+            ],
+          });
+        }}>3M</Button>
+        <Button onClick={() => {
+          setData({
+            labels: labels1y,
+            datasets: [
+              {
+                label: 'Price',
+                data: prices1y,
+                fill: false,
+                backgroundColor: 'rgb(0, 200, 0)',
+                borderColor: 'rgba(0, 200, 0, 0.2)',
+              },
+            ],
+          });
+        }}>1Y</Button>
       </ButtonGroup>
       <Line data={data} options={options} type={'segment'}/>
     </>
