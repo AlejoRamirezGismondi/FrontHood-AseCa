@@ -103,7 +103,7 @@ class Search extends Component {
             <div>
                 <SearchBar handleSearch={input => this.filterBySearchInput(input)}
                            handleSubmit={() => this.handleSearch()}/>
-                <div className="search-unknown"
+                <div className="search-unknown" data-testid={"search-unknown-id"}
                      style={{visibility: this.state.showErrorMessage ? 'visible' : 'hidden' }} >
                     {this.state.errorMessage}
                 </div>

@@ -69,8 +69,7 @@ const useStyles = makeStyles((theme) => ({
 const ActionDetails = () => {
   const classes = useStyles();
   const history = useHistory();
-  const { symbol } = useParams();
-  const { name } = useParams();
+  const { name, symbol } = useParams();
   const [error, setError] = useState<boolean>(false);
   const [details, setDetails] = useState<StockDetails>({
     price: '1',
@@ -103,7 +102,7 @@ const ActionDetails = () => {
     }).catch(err => {
       console.log(err)
     });
-  }, [symbol]);
+  }, []);
 
   const [openDrawer, setOpenDrawer] = useState<boolean>(false)
   const [openReceiptView, setOpenReceiptView] = useState<boolean>(false)

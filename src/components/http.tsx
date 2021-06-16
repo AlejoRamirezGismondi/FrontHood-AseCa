@@ -19,7 +19,6 @@ const request = (url: string, method: string, body: Object | null, config: Confi
     return fetch(baseurl + url, configuration)
 
         .then(response => {
-            console.log(response)
             if(response.ok) return response.json();
 
             // if an error occurs on the server return the errorMessage in case we intentionally threw that error, or a generic one in case an unexpected exception rises.
