@@ -22,12 +22,12 @@ describe('Details tests', () => {
             .should('include.text', '2')
         cy.get(':nth-child(3) > .MuiPaper-root > .MuiTable-root > .MuiTableBody-root > :nth-child(7) > :nth-child(2)')
             .should('include.text', '2')
-        cy.get(':nth-child(3) > .makeStyles-paper-7 > .MuiPaper-root > .MuiTable-root > .MuiTableBody-root > .MuiTableRow-root > :nth-child(2)')
-            .should('include.text', '1')
-        cy.get(':nth-child(3) > .makeStyles-paper-7 > .MuiPaper-root > .MuiTable-root > .MuiTableBody-root > .MuiTableRow-root > :nth-child(3)')
+        cy.get(':nth-child(3) > .jss7 > .MuiPaper-root > .MuiTable-root > .MuiTableBody-root > .MuiTableRow-root > :nth-child(2)')
             .should('include.text', '2')
-        cy.get(':nth-child(3) > .makeStyles-paper-7 > .MuiPaper-root > .MuiTable-root > .MuiTableBody-root > .MuiTableRow-root > :nth-child(4)')
-            .should('include.text', '3')
+        cy.get('.MuiTableBody-root > .MuiTableRow-root > :nth-child(3)')
+            .should('include.text', '1')
+        cy.get('.MuiTableBody-root > .MuiTableRow-root > :nth-child(4)')
+            .should('include.text', '10')
     })
 
     it('Validate stock history', () => {

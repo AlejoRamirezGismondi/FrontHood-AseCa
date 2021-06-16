@@ -47,9 +47,9 @@ const DetailTable = (props: Props) => {
             <TableCell component="th" scope="row">
               {props.name}
             </TableCell>
-            <TableCell align="right">{props.details.buy}</TableCell>
-            <TableCell align="right">{props.details.sell}</TableCell>
-            <TableCell align="right">{props.details.hold}</TableCell>
+            <TableCell align="right" id={'review-buy'}>{props.details.buy}</TableCell>
+            <TableCell align="right" id={'review-sell'}>{props.details.sell}</TableCell>
+            <TableCell align="right" id={'review-hold'}>{props.details.hold}</TableCell>
           </StyledTableRow>
         </TableBody>
       </Table>
